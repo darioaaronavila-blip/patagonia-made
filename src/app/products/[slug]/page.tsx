@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getProductBySlug, getAllProducts, getMakerById } from "@/lib/data";
 import MetaBar from "@/components/layout/MetaBar";
 import Header from "@/components/layout/Header";
@@ -87,12 +88,35 @@ export default async function ProductPage({
             <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px,3vw,42px)", fontWeight: 400, letterSpacing: "-0.02em", marginBottom: "24px" }}>
               {maker.name}
             </h2>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "18px", lineHeight: 1.7, color: "var(--ink-soft)", maxWidth: "640px" }}>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "18px", lineHeight: 1.7, color: "var(--ink-soft)", maxWidth: "640px", marginBottom: "32px" }}>
               {maker.bio}
             </p>
+            <Link href={`/makers/${maker.id}`} style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--rust)", borderBottom: "1px solid var(--rust)", paddingBottom: "2px" }}>
+              All pieces by {maker.name.split(" ")[0]} →
+            </Link>
           </div>
         )}
       </main>
+
+      {/* Slim footer */}
+      <footer style={{ background: "var(--ink)", color: "var(--paper)", padding: "24px 48px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "16px", marginTop: "80px" }}>
+        <Link href="/" style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: "18px", letterSpacing: "-0.02em", color: "var(--paper)" }}>
+          Patagonia <span style={{ color: "var(--gold)", fontStyle: "italic", fontWeight: 500 }}>&amp;</span> Made
+        </Link>
+        <div style={{ display: "flex", gap: "24px", fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.15em", textTransform: "uppercase", flexWrap: "wrap" }}>
+          {[
+            { label: "All pieces", href: "/products" },
+            { label: "Makers", href: "/makers" },
+            { label: "Delivery", href: "/delivery" },
+            { label: "Our Story", href: "/story" },
+          ].map(({ label, href }) => (
+            <Link key={label} href={href} style={{ color: "rgba(237,228,211,0.6)", transition: "color 0.2s" }} className="footer-link">{label}</Link>
+          ))}
+        </div>
+        <div style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase", opacity: 0.35 }}>
+          53°09′S 70°55′W
+        </div>
+      </footer>
     </>
   );
 }

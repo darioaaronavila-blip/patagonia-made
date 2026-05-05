@@ -60,17 +60,27 @@ export async function POST(req: Request) {
         const accommodationName = fields.find((f) => f.key === "accommodation_name")?.text?.value ?? undefined;
         const roomNumber = fields.find((f) => f.key === "room_number")?.text?.value ?? undefined;
 
-        // Reconstruct order items from line items + product metadata
+        // Reconstruct order items — filter out the delivery fee line item
+        const DELIVERY_KEYWORDS = ["delivery", "pickup", "workshop"];
         const items = lineItemsResult.data
-          .filter((li) => li.price?.product_data?.metadata?.productId)
+          .filter((li) => {
+            const desc = (li.description ?? "").toLowerCase();
+            return !DELIVERY_KEYWORDS.some((kw) => desc.includes(kw));
+          })
           .map((li) => {
-            const productId = li.price!.product_data!.metadata!.productId;
-            const product = productById.get(productId);
+            // Try to match back to our product data by name
+            const allProducts = Array.from(productById.values());
+            const product = allProducts.find(
+              (p) => p.name === li.description || li.description?.includes(p.makerName)
+            ) ?? allProducts.find(
+              (p) => li.description?.toLowerCase().includes(p.makerName.split(" ")[0].toLowerCase())
+            );
             return {
               name: li.description ?? product?.name ?? "Unknown",
-              makerName: product?.makerName ?? li.price?.product_data?.metadata?.makerId ?? "",
+              makerName: product?.makerName ?? "",
               quantity: li.quantity ?? 1,
-              priceUsd: product?.priceUsd ?? Math.round((li.amount_total ?? 0) / 100),
+              priceUsd: product?.priceUsd ?? Math.round((li.amount_total ?? 0) / 100 / (li.quantity ?? 1)),
+              slug: product?.slug ?? "",
             };
           });
 
@@ -78,7 +88,7 @@ export async function POST(req: Request) {
         const totalUsd = Math.round((session.amount_total ?? 0) / 100);
 
         await sendOrderConfirmation({
-          customerEmail: session.customer_email ?? "",
+          customerEmail: session.customer_email ?? session.customer_details?.email ?? "",
           sessionId: session.id,
           items,
           deliveryLabel,

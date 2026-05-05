@@ -74,7 +74,8 @@ export async function createCheckoutSession(input: CreateSessionInput) {
     mode: "payment",
     ui_mode: "embedded",
     line_items: lineItems,
-    customer_email: customerEmail,
+    customer_email: customerEmail || undefined,
+    billing_address_collection: "auto",
     return_url: `${siteUrl}/order-confirmed?session_id={CHECKOUT_SESSION_ID}`,
     metadata: {
       deliveryOption,

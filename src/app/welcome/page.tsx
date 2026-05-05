@@ -22,114 +22,89 @@ export default async function WelcomePage() {
         style={{
           background: "var(--ink)",
           color: "var(--paper)",
-          padding: "72px 48px 64px",
+          height: "calc(100vh - 37px)",
+          padding: "0 48px",
           borderBottom: "1px solid rgba(237,228,211,0.15)",
           position: "relative",
           overflow: "hidden",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
         }}
       >
-        {/* Background mountains — same SVG language as the main site */}
-        <div style={{ position: "absolute", inset: 0, zIndex: 0, opacity: 0.2 }}>
-          <svg
-            viewBox="0 0 1600 500"
-            preserveAspectRatio="xMidYMid slice"
-            style={{ width: "100%", height: "100%" }}
-          >
+        {/* Background */}
+        <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+          <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" style={{ width: "100%", height: "100%" }}>
             <defs>
               <linearGradient id="wsky" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#1a2422" />
-                <stop offset="100%" stopColor="#3a4a44" />
+                <stop offset="0%" stopColor="#0e1614"/>
+                <stop offset="55%" stopColor="#1a2a26"/>
+                <stop offset="100%" stopColor="#2a3a36"/>
+              </linearGradient>
+              <linearGradient id="wwater" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#1a2624"/>
+                <stop offset="100%" stopColor="#0a1210"/>
+              </linearGradient>
+              <linearGradient id="wdarken" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor="#0e1614" stopOpacity="0.98"/>
+                <stop offset="50%" stopColor="#0e1614" stopOpacity="0.6"/>
+                <stop offset="100%" stopColor="#0e1614" stopOpacity="0.25"/>
               </linearGradient>
             </defs>
-            <rect width="1600" height="500" fill="url(#wsky)" />
-            <path
-              d="M0,280 L120,230 L260,260 L400,200 L560,240 L720,190 L880,230 L1040,195 L1200,240 L1360,210 L1520,250 L1600,225 L1600,500 L0,500 Z"
-              fill="#2a3a36"
-              opacity="0.7"
-            />
-            <path
-              d="M0,340 L100,305 L240,330 L400,275 L580,315 L760,270 L940,310 L1120,275 L1300,320 L1480,290 L1600,315 L1600,500 L0,500 Z"
-              fill="#1a2a26"
-            />
+            <rect width="1600" height="900" fill="url(#wsky)"/>
+            <path d="M0,480 L140,420 L300,460 L480,390 L660,430 L840,375 L1020,415 L1200,380 L1380,425 L1520,395 L1600,415 L1600,900 L0,900 Z" fill="#1f2d2a" opacity="0.7"/>
+            <path d="M0,540 L120,500 L260,525 L420,470 L600,510 L780,460 L960,500 L1140,468 L1320,510 L1480,480 L1600,505 L1600,900 L0,900 Z" fill="#152220"/>
+            <rect y="680" width="1600" height="220" fill="url(#wwater)"/>
+            <path d="M0,710 Q400,705 800,715 Q1200,705 1600,710" stroke="#2a3a36" strokeWidth="0.8" fill="none" opacity="0.4"/>
+            <path d="M0,730 Q400,725 800,735 Q1200,725 1600,730" stroke="#2a3a36" strokeWidth="0.6" fill="none" opacity="0.3"/>
+            <rect width="1600" height="900" fill="url(#wdarken)"/>
           </svg>
         </div>
 
-        <div
-          style={{
-            position: "relative",
-            zIndex: 1,
-            maxWidth: "880px",
-            margin: "0 auto",
-            textAlign: "center",
-          }}
-        >
-          {/* Eyebrow */}
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "10px",
-              letterSpacing: "0.35em",
-              textTransform: "uppercase",
-              color: "var(--gold)",
-              marginBottom: "28px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "12px",
-            }}
-          >
-            <span
-              style={{
-                display: "inline-block",
-                width: "6px",
-                height: "6px",
-                borderRadius: "50%",
-                background: "var(--moss)",
-                boxShadow: "0 0 0 3px rgba(74,93,58,0.3)",
-                animation: "pulse 2s ease-in-out infinite",
-              }}
-            />
-            53°09′S · Punta Arenas, Chile
+        {/* Top: coordinates */}
+        <div style={{ position: "relative", zIndex: 1, display: "flex", justifyContent: "center", alignItems: "center", gap: "24px", paddingTop: "28px" }}>
+          <div style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--gold)", opacity: 0.8 }}>
+            53°09′S — 70°55′W
           </div>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px", fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(237,228,211,0.5)" }}>
+            <span style={{ display: "inline-block", width: "5px", height: "5px", borderRadius: "50%", background: "var(--moss)", animation: "pulse 2s ease-in-out infinite" }}/>
+            Open now
+          </div>
+        </div>
 
-          {/* Headline */}
-          <h1
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(36px, 6vw, 80px)",
-              fontWeight: 300,
-              lineHeight: 1,
-              letterSpacing: "-0.03em",
-              marginBottom: "28px",
-              color: "var(--paper-light)",
-            }}
-          >
+        {/* Centre: headline */}
+        <div style={{ position: "relative", zIndex: 1, maxWidth: "820px", margin: "0 auto", textAlign: "center" }}>
+
+          <h1 style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(44px, 7.5vh, 96px)",
+            fontWeight: 300,
+            lineHeight: 1.15,
+            letterSpacing: "-0.01em",
+            marginBottom: "28px",
+            color: "var(--paper-light)",
+          }}>
             You just arrived.
             <br />
-            <em style={{ fontStyle: "italic", color: "var(--gold)", fontWeight: 400 }}>
-              Here&apos;s what Punta Arenas
-            </em>
+            <em style={{ fontStyle: "italic", color: "var(--gold)", fontWeight: 400 }}>Welcome</em>
             <br />
-            <strong style={{ fontWeight: 900 }}>makes by hand.</strong>
+            <strong style={{ fontWeight: 900 }}>to the end of the world.</strong>
           </h1>
 
-          {/* Sub */}
-          <p
-            style={{
-              fontFamily: "var(--font-body)",
-              fontSize: "clamp(17px, 2vw, 21px)",
-              fontStyle: "italic",
-              lineHeight: 1.6,
-              color: "rgba(237,228,211,0.8)",
-              maxWidth: "560px",
-              margin: "0 auto 40px",
-            }}
-          >
-            Wool, leather, ceramics and provisions — made by local artisans, available
-            right now, delivered to your hotel before dinner.
+          <p style={{
+            fontFamily: "var(--font-body)",
+            fontStyle: "italic",
+            fontSize: "clamp(17px, 2vw, 22px)",
+            color: "rgba(237,228,211,0.7)",
+            marginBottom: "40px",
+            lineHeight: 1.6,
+            maxWidth: "540px",
+            margin: "0 auto 40px",
+          }}>
+            Here&apos;s what Punta Arenas makes by hand —
+            available right now, delivered to your hotel before dinner.
           </p>
 
-          {/* Primary CTA */}
           <Link
             href="#catalog"
             style={{
@@ -137,99 +112,72 @@ export default async function WelcomePage() {
               alignItems: "center",
               gap: "10px",
               padding: "18px 36px",
-              background: "var(--rust)",
+              background: "transparent",
               color: "var(--paper)",
               fontFamily: "var(--font-mono)",
-              fontSize: "12px",
+              fontSize: "11px",
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              border: "1px solid var(--rust)",
+              border: "1px solid rgba(237,228,211,0.4)",
             }}
           >
-            Browse the collection ↓
+            See the collection ↓
           </Link>
+        </div>
+
+        {/* Bottom: three maker names as atmosphere */}
+        <div style={{
+          position: "relative",
+          zIndex: 1,
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gap: "24px",
+          borderTop: "1px solid rgba(237,228,211,0.08)",
+          padding: "20px 0 28px",
+          textAlign: "center",
+        }}>
+          {[
+            { name: "Rosa Mansilla", craft: "Wool · Río Verde", since: "Est. 1998" },
+            { name: "Héctor Vargas", craft: "Lenga wood · Punta Arenas", since: "Est. 2003" },
+            { name: "Carmen Díaz", craft: "Preserves · Magallanes", since: "Est. 2011" },
+          ].map(({ name, craft, since }) => (
+            <div key={name}>
+              <div style={{ fontFamily: "var(--font-display)", fontSize: "15px", fontWeight: 400, color: "rgba(237,228,211,0.7)", marginBottom: "4px" }}>{name}</div>
+              <div style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(237,228,211,0.35)" }}>{craft} · {since}</div>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* ── DELIVERY BANNER ────────────────────────────────────────── */}
-      <div
-        style={{
-          background: "var(--rust)",
-          color: "var(--paper)",
-          padding: "20px 48px",
-          borderBottom: "1px solid var(--ink)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "32px",
-          flexWrap: "wrap",
-        }}
-      >
-        {/* Icon */}
-        <svg
-          width="28"
-          height="28"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.4"
-          style={{ flexShrink: 0, opacity: 0.9 }}
-        >
-          <path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z" />
-          <path d="M3 9V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2" />
-          <path d="M9 14h6" />
+      {/* ── DELIVERY BANNER — visible on first scroll ─────────────── */}
+      <div style={{
+        background: "var(--rust)",
+        color: "var(--paper)",
+        padding: "20px 48px",
+        borderBottom: "1px solid var(--ink)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "32px",
+        flexWrap: "wrap",
+      }}>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" style={{ flexShrink: 0, opacity: 0.9 }}>
+          <path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z"/>
+          <path d="M3 9V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2"/>
+          <path d="M9 14h6"/>
         </svg>
-
         <div style={{ textAlign: "center" }}>
-          <div
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(18px, 2.5vw, 24px)",
-              fontWeight: 500,
-              letterSpacing: "-0.01em",
-              marginBottom: "4px",
-            }}
-          >
+          <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(17px,2.2vw,22px)", fontWeight: 500, letterSpacing: "-0.01em", marginBottom: "4px" }}>
             Same-day hotel delivery in Punta Arenas
           </div>
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "11px",
-              letterSpacing: "0.15em",
-              textTransform: "uppercase",
-              opacity: 0.85,
-            }}
-          >
-            Order before 18:00 · We bring it to your hotel reception tonight ·{" "}
-            Free over $150
+          <div style={{ fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase", opacity: 0.85 }}>
+            Order before 18:00 · Delivered to your hotel tonight · Free over $150
           </div>
         </div>
-
-        {/* Divider */}
-        <div
-          style={{
-            width: "1px",
-            height: "40px",
-            background: "rgba(237,228,211,0.3)",
-            flexShrink: 0,
-          }}
-        />
-
-        {/* Pickup option */}
-        <div
-          style={{
-            fontFamily: "var(--font-mono)",
-            fontSize: "11px",
-            letterSpacing: "0.12em",
-            textTransform: "uppercase",
-            opacity: 0.85,
-            textAlign: "center",
-          }}
-        >
-          Or pick up
-          <br />
-          <span style={{ fontFamily: "var(--font-display)", fontSize: "15px", fontStyle: "italic", textTransform: "none", letterSpacing: 0, opacity: 1 }}>
+        <div style={{ width: "1px", height: "36px", background: "rgba(237,228,211,0.3)", flexShrink: 0 }}/>
+        <div style={{ fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.12em", textTransform: "uppercase", opacity: 0.85, textAlign: "center" }}>
+          Or pick up<br/>
+          <span style={{ fontFamily: "var(--font-display)", fontSize: "15px", fontStyle: "italic", textTransform: "none", letterSpacing: 0 }}>
             directly at the workshop
           </span>
         </div>

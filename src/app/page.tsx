@@ -220,13 +220,13 @@ export default async function Home() {
           </h2>
           <div style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--ink-soft)", textAlign: "right" }}>For travelers · simple terms</div>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1px", background: "var(--ink)" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "32px" }}>
           {[
             { num: "i.", title: "Browse anytime, anywhere", body: "Closed shops, late flights, public holidays — the marketplace doesn't sleep. Discover makers across Magallanes from your hotel, your plane, or your sofa back home." },
             { num: "ii.", title: "Pay in your currency", body: "Checkout in USD, EUR, or your card's native currency. We handle the conversion and pay the maker in Chilean pesos. No friction, no surprise fees." },
             { num: "iii.", title: "Choose how it reaches you", body: "Delivery to your hotel or accommodation in Punta Arenas and surrounding areas, or pickup directly at the maker's workshop. Every piece travels with the maker's story and a card hand-signed at origin." },
           ].map(({ num, title, body }) => (
-            <div key={num} className="fade-in" style={{ background: "var(--paper)", padding: "56px 40px" }}>
+            <div key={num} className="how-step" style={{ background: "var(--paper)", padding: "40px 36px", border: "1px solid rgba(26,36,34,0.12)", boxShadow: "0 2px 12px -4px rgba(26,36,34,0.08)" }}>
               <div style={{ fontFamily: "var(--font-display)", fontStyle: "italic", fontSize: "96px", lineHeight: 0.8, color: "var(--rust)", marginBottom: "24px", fontWeight: 300 }}>{num}</div>
               <h3 style={{ fontFamily: "var(--font-display)", fontSize: "28px", fontWeight: 500, letterSpacing: "-0.01em", lineHeight: 1.15, marginBottom: "16px" }}>{title}</h3>
               <p style={{ fontFamily: "var(--font-body)", fontSize: "17px", lineHeight: 1.6, color: "var(--ink-soft)" }}>{body}</p>

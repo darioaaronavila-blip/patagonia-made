@@ -19,7 +19,6 @@ export default function CheckoutPage() {
     ? { feeUsd: 0, feeCents: 0, isFree: true, reason: "No fee" }
     : calcDeliveryFee(delivery, totalUsd);
   const grandTotal = totalUsd + fee.feeUsd;
-
   const selectedZone = !isPickup ? DELIVERY_ZONES.find((z) => z.id === delivery) : null;
 
   if (items.length === 0) {
@@ -31,7 +30,7 @@ export default function CheckoutPage() {
           <div style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: "24px", color: "var(--ink-soft)", marginBottom: "32px" }}>
             Your cart is empty.
           </div>
-          <Link href="/#shop" style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "14px 28px", background: "var(--ink)", color: "var(--paper)", fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase" }}>
+          <Link href="/products" style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "14px 28px", background: "var(--ink)", color: "var(--paper)", fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase" }}>
             Browse the Collection →
           </Link>
         </main>
@@ -43,48 +42,20 @@ export default function CheckoutPage() {
     <>
       <MetaBar />
       <Header />
-      <main style={{ padding: "64px 48px", maxWidth: "1200px", margin: "0 auto" }}>
+      <main style={{ padding: "56px 48px 100px", maxWidth: "1060px", margin: "0 auto" }}>
 
         {/* Title */}
-        <div style={{ marginBottom: "56px", borderBottom: "1px solid var(--ink)", paddingBottom: "24px" }}>
-          <div style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--ink-soft)", marginBottom: "8px" }}>— Checkout</div>
-          <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px,4vw,52px)", fontWeight: 300, lineHeight: 1, letterSpacing: "-0.02em" }}>Almost there.</h1>
+        <div style={{ marginBottom: "44px", borderBottom: "1px solid var(--ink)", paddingBottom: "20px", display: "flex", alignItems: "baseline", gap: "20px" }}>
+          <div style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--ink-soft)" }}>— Checkout</div>
+          <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px,3.5vw,48px)", fontWeight: 300, lineHeight: 1, letterSpacing: "-0.02em" }}>Almost there.</h1>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 400px", gap: "80px", alignItems: "start" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 400px", gap: "64px", alignItems: "start" }}>
 
-          {/* LEFT */}
+          {/* LEFT — delivery options */}
           <div>
-
-            {/* Order summary */}
-            <div style={{ marginBottom: "48px" }}>
-              <div style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--ink-soft)", marginBottom: "20px" }}>
-                Your order · {totalItems} {totalItems === 1 ? "piece" : "pieces"}
-              </div>
-              <ul style={{ listStyle: "none" }}>
-                {items.map((item) => {
-                  const product = getProduct(item.productId);
-                  if (!product) return null;
-                  return (
-                    <li key={item.productId} style={{ padding: "16px 0", borderBottom: "1px solid rgba(26,36,34,0.08)", display: "grid", gridTemplateColumns: "1fr auto", gap: "16px", alignItems: "start" }}>
-                      <div>
-                        <div style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--ink-mute)", marginBottom: "3px" }}>{product.category}</div>
-                        <div style={{ fontFamily: "var(--font-display)", fontSize: "17px", fontWeight: 400, marginBottom: "3px" }}>{product.name}</div>
-                        <div style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: "13px", color: "var(--ink-soft)" }}>— {product.makerName}</div>
-                        {item.quantity > 1 && (
-                          <div style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--ink-mute)", marginTop: "4px" }}>qty {item.quantity} × ${product.priceUsd}</div>
-                        )}
-                      </div>
-                      <div style={{ fontFamily: "var(--font-display)", fontSize: "19px", fontWeight: 500 }}>${product.priceUsd * item.quantity}</div>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-
-            {/* Delivery selector + calculator */}
-            {!showStripe && (
-              <div>
+            {!showStripe ? (
+              <>
                 <div style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--ink-soft)", marginBottom: "20px" }}>
                   Where should we bring it?
                 </div>
@@ -98,25 +69,22 @@ export default function CheckoutPage() {
                       <button
                         key={zone.id}
                         onClick={() => setDelivery(zone.id as DeliveryOption)}
-                        style={{ background: selected ? "var(--ink)" : "var(--paper)", color: selected ? "var(--paper)" : "var(--ink)", border: "none", padding: "24px 28px", cursor: "pointer", display: "grid", gridTemplateColumns: "20px 1fr auto", gap: "16px", alignItems: "start", textAlign: "left", transition: "all 0.2s" }}
+                        style={{ background: selected ? "var(--ink)" : "var(--paper)", color: selected ? "var(--paper)" : "var(--ink)", border: "none", padding: "22px 28px", cursor: "pointer", display: "grid", gridTemplateColumns: "20px 1fr auto", gap: "16px", alignItems: "center", textAlign: "left", transition: "all 0.2s" }}
                       >
-                        {/* Radio dot */}
-                        <div style={{ width: "18px", height: "18px", borderRadius: "50%", border: `1.5px solid ${selected ? "var(--gold)" : "var(--ink-mute)"}`, display: "flex", alignItems: "center", justifyContent: "center", marginTop: "3px", flexShrink: 0 }}>
+                        <div style={{ width: "18px", height: "18px", borderRadius: "50%", border: `1.5px solid ${selected ? "var(--gold)" : "var(--ink-mute)"}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                           {selected && <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "var(--gold)" }} />}
                         </div>
                         <div>
-                          <div style={{ fontFamily: "var(--font-display)", fontSize: "18px", fontWeight: 500, marginBottom: "4px" }}>{zone.label}</div>
-                          <div style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: "14px", opacity: 0.75, marginBottom: "6px" }}>{zone.description}</div>
-                          <div style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.15em", textTransform: "uppercase", opacity: 0.6 }}>
+                          <div style={{ fontFamily: "var(--font-display)", fontSize: "17px", fontWeight: 500, marginBottom: "4px" }}>{zone.label}</div>
+                          <div style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.12em", textTransform: "uppercase", opacity: 0.6 }}>
                             {zone.distanceKm} · {zone.etaLabel}
                           </div>
-                          {selected && (
-                            <div style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.1em", color: selected ? "rgba(200,156,94,0.9)" : "var(--ink-mute)", marginTop: "8px" }}>
+                          {selected && zone.examples && (
+                            <div style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: "13px", opacity: 0.65, marginTop: "6px" }}>
                               e.g. {zone.examples}
                             </div>
                           )}
                         </div>
-                        {/* Fee badge */}
                         <div style={{ textAlign: "right", flexShrink: 0 }}>
                           {zoneFee.isFree ? (
                             <span style={{ fontFamily: "var(--font-display)", fontSize: "18px", color: selected ? "var(--gold)" : "var(--moss)" }}>Free</span>
@@ -124,7 +92,7 @@ export default function CheckoutPage() {
                             <>
                               <div style={{ fontFamily: "var(--font-display)", fontSize: "18px" }}>${zone.feeUsd}</div>
                               {zone.freeThresholdUsd > 0 && (
-                                <div style={{ fontFamily: "var(--font-mono)", fontSize: "8px", letterSpacing: "0.1em", textTransform: "uppercase", opacity: 0.6, marginTop: "2px" }}>
+                                <div style={{ fontFamily: "var(--font-mono)", fontSize: "8px", letterSpacing: "0.1em", textTransform: "uppercase", opacity: 0.5, marginTop: "2px" }}>
                                   free over ${zone.freeThresholdUsd}
                                 </div>
                               )}
@@ -136,111 +104,104 @@ export default function CheckoutPage() {
                   })}
                 </div>
 
-                {/* Pickup option */}
-                <div style={{ background: "var(--ink)", border: "1px solid var(--ink)", borderTop: "none" }}>
+                {/* Pickup */}
+                <div style={{ background: "var(--ink)", border: "1px solid var(--ink)", borderTop: "none", marginBottom: "12px" }}>
                   <button
                     onClick={() => setDelivery("pickup")}
-                    style={{ background: delivery === "pickup" ? "var(--teal-deep)" : "var(--paper-deep)", color: delivery === "pickup" ? "var(--paper)" : "var(--ink)", border: "none", padding: "24px 28px", cursor: "pointer", display: "grid", gridTemplateColumns: "20px 1fr auto", gap: "16px", alignItems: "start", textAlign: "left", transition: "all 0.2s", width: "100%" }}
+                    style={{ background: delivery === "pickup" ? "var(--teal-deep)" : "var(--paper-deep)", color: delivery === "pickup" ? "var(--paper)" : "var(--ink)", border: "none", padding: "22px 28px", cursor: "pointer", display: "grid", gridTemplateColumns: "20px 1fr auto", gap: "16px", alignItems: "center", textAlign: "left", transition: "all 0.2s", width: "100%" }}
                   >
-                    <div style={{ width: "18px", height: "18px", borderRadius: "50%", border: `1.5px solid ${delivery === "pickup" ? "var(--gold)" : "var(--ink-mute)"}`, display: "flex", alignItems: "center", justifyContent: "center", marginTop: "3px", flexShrink: 0 }}>
-                      {delivery === "pickup" && <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "var(--gold)" }} />}
+                    <div style={{ width: "16px", height: "16px", borderRadius: "50%", border: `1.5px solid ${delivery === "pickup" ? "var(--gold)" : "var(--ink-mute)"}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                      {delivery === "pickup" && <div style={{ width: "7px", height: "7px", borderRadius: "50%", background: "var(--gold)" }} />}
                     </div>
                     <div>
-                      <div style={{ fontFamily: "var(--font-display)", fontSize: "18px", fontWeight: 500, marginBottom: "4px" }}>{PICKUP_OPTION.label}</div>
-                      <div style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: "14px", opacity: 0.75, marginBottom: "6px" }}>{PICKUP_OPTION.description}</div>
-                      <div style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.15em", textTransform: "uppercase", opacity: 0.6 }}>{PICKUP_OPTION.etaLabel}</div>
+                      <div style={{ fontFamily: "var(--font-display)", fontSize: "16px", fontWeight: 500, marginBottom: "2px" }}>{PICKUP_OPTION.label}</div>
+                      <div style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.12em", textTransform: "uppercase", opacity: 0.6 }}>{PICKUP_OPTION.etaLabel}</div>
                     </div>
-                    <div style={{ flexShrink: 0 }}>
-                      <span style={{ fontFamily: "var(--font-display)", fontSize: "18px", color: delivery === "pickup" ? "var(--gold)" : "var(--moss)" }}>Free</span>
-                    </div>
+                    <span style={{ fontFamily: "var(--font-display)", fontSize: "16px", color: delivery === "pickup" ? "var(--gold)" : "var(--moss)", flexShrink: 0 }}>Free</span>
                   </button>
                 </div>
 
-                {/* Free delivery nudge */}
+                {/* Nudge */}
                 {!isPickup && !fee.isFree && selectedZone?.freeThresholdUsd && selectedZone.freeThresholdUsd > 0 && (
-                  <div style={{ marginTop: "16px", padding: "14px 20px", background: "var(--paper-deep)", border: "1px solid rgba(26,36,34,0.15)", fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.1em", color: "var(--ink-soft)" }}>
-                    Add <strong style={{ color: "var(--ink)" }}>${selectedZone.freeThresholdUsd - totalUsd} more</strong> to unlock free delivery to {selectedZone.label}.
+                  <div style={{ padding: "12px 16px", background: "var(--paper-deep)", border: "1px solid rgba(26,36,34,0.15)", fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.1em", color: "var(--ink-soft)" }}>
+                    Add <strong style={{ color: "var(--ink)" }}>${selectedZone.freeThresholdUsd - totalUsd} more</strong> for free delivery to {selectedZone.label}.
                   </div>
                 )}
                 {!isPickup && fee.isFree && (
-                  <div style={{ marginTop: "16px", padding: "14px 20px", background: "rgba(74,93,58,0.08)", border: "1px solid var(--moss)", fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.1em", color: "var(--moss)" }}>
+                  <div style={{ padding: "12px 16px", background: "rgba(74,93,58,0.08)", border: "1px solid var(--moss)", fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.1em", color: "var(--moss)" }}>
                     ✓ {fee.reason}
                   </div>
                 )}
-
-                <button
-                  onClick={() => setShowStripe(true)}
-                  style={{ width: "100%", marginTop: "32px", padding: "18px", background: "var(--rust)", color: "var(--paper)", border: "none", fontFamily: "var(--font-mono)", fontSize: "12px", letterSpacing: "0.2em", textTransform: "uppercase", cursor: "pointer", transition: "background 0.3s" }}
-                >
-                  Continue to Payment →
-                </button>
-              </div>
-            )}
-
-            {/* Stripe form */}
-            {showStripe && (
-              <div>
+              </>
+            ) : (
+              <>
                 <button
                   onClick={() => setShowStripe(false)}
-                  style={{ display: "flex", alignItems: "center", gap: "8px", background: "none", border: "none", color: "var(--ink-soft)", fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", cursor: "pointer", marginBottom: "32px" }}
+                  style={{ display: "flex", alignItems: "center", gap: "8px", background: "none", border: "none", color: "var(--ink-soft)", fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", cursor: "pointer", marginBottom: "24px" }}
                 >
                   ← Back to delivery options
                 </button>
                 <StripeCheckout items={items} deliveryOption={delivery} />
-              </div>
+              </>
             )}
           </div>
 
-          {/* RIGHT — sticky summary */}
-          <div style={{ position: "sticky", top: "40px", background: "var(--paper-deep)", padding: "36px", border: "1px solid var(--ink)" }}>
-            <div style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--ink-soft)", marginBottom: "24px" }}>
-              Order total
-            </div>
-
-            {/* Line items summary */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "20px" }}>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <span style={{ fontFamily: "var(--font-body)", fontSize: "16px", color: "var(--ink-soft)" }}>
-                  {totalItems} {totalItems === 1 ? "piece" : "pieces"}
-                </span>
-                <span style={{ fontFamily: "var(--font-display)", fontSize: "18px" }}>${totalUsd}</span>
+          {/* RIGHT — order summary + CTA */}
+          <div style={{ position: "sticky", top: "24px" }}>
+            <div style={{ background: "var(--paper-deep)", padding: "36px", border: "1px solid var(--ink)" }}>
+              <div style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--ink-soft)", marginBottom: "16px" }}>
+                Order summary
               </div>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-                <span style={{ fontFamily: "var(--font-body)", fontSize: "16px", color: "var(--ink-soft)" }}>
-                  {isPickup ? "Pickup" : selectedZone ? selectedZone.label : "Delivery"}
+
+              {/* Items */}
+              <ul style={{ listStyle: "none", marginBottom: "16px" }}>
+                {items.map((item) => {
+                  const product = getProduct(item.productId);
+                  if (!product) return null;
+                  return (
+                    <li key={item.productId} style={{ padding: "10px 0", borderBottom: "1px solid rgba(26,36,34,0.08)", display: "grid", gridTemplateColumns: "1fr auto", gap: "12px", alignItems: "start" }}>
+                      <div>
+                        <div style={{ fontFamily: "var(--font-display)", fontSize: "15px", fontWeight: 400, lineHeight: 1.2, marginBottom: "2px" }}>{product.name}</div>
+                        <div style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: "12px", color: "var(--ink-soft)" }}>— {product.makerName}{item.quantity > 1 ? ` × ${item.quantity}` : ""}</div>
+                      </div>
+                      <div style={{ fontFamily: "var(--font-display)", fontSize: "16px", fontWeight: 500, flexShrink: 0 }}>${product.priceUsd * item.quantity}</div>
+                    </li>
+                  );
+                })}
+              </ul>
+
+              {/* Delivery line */}
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", padding: "10px 0", borderBottom: "1px solid rgba(26,36,34,0.08)" }}>
+                <span style={{ fontFamily: "var(--font-body)", fontSize: "15px", color: "var(--ink-soft)" }}>
+                  {isPickup ? "Pickup" : selectedZone?.label ?? "Delivery"}
                 </span>
-                <span style={{ fontFamily: "var(--font-display)", fontSize: "18px", color: fee.isFree ? "var(--moss)" : "var(--ink)" }}>
+                <span style={{ fontFamily: "var(--font-display)", fontSize: "16px", color: fee.isFree ? "var(--moss)" : "var(--ink)" }}>
                   {fee.isFree ? "Free" : `$${fee.feeUsd}`}
                 </span>
               </div>
-            </div>
 
-            <div style={{ borderTop: "1px solid rgba(26,36,34,0.2)", paddingTop: "20px", marginBottom: "28px", display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-              <span style={{ fontFamily: "var(--font-display)", fontSize: "20px", fontWeight: 500 }}>Total</span>
-              <span style={{ fontFamily: "var(--font-display)", fontSize: "32px", fontWeight: 500 }}>${grandTotal}</span>
-            </div>
-
-            {/* Delivery detail */}
-            {selectedZone && (
-              <div style={{ padding: "16px", background: "var(--paper)", border: "1px solid rgba(26,36,34,0.1)", marginBottom: "24px" }}>
-                <div style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--ink-mute)", marginBottom: "6px" }}>
-                  Delivery estimate
-                </div>
-                <div style={{ fontFamily: "var(--font-body)", fontSize: "15px", color: "var(--ink-soft)" }}>
-                  {selectedZone.etaLabel}
-                </div>
+              {/* Total */}
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", paddingTop: "16px", marginBottom: "24px" }}>
+                <span style={{ fontFamily: "var(--font-display)", fontSize: "18px", fontWeight: 500 }}>Total</span>
+                <span style={{ fontFamily: "var(--font-display)", fontSize: "28px", fontWeight: 500 }}>${grandTotal}</span>
               </div>
-            )}
 
-            <div style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--ink-mute)", lineHeight: 2 }}>
-              <div>✓ Secure payment via Stripe</div>
-              <div>✓ Prices in USD</div>
-              <div>✓ Maker notified immediately</div>
-              <div>✓ Hand-checked before delivery</div>
-            </div>
+              {/* CTA button — right under the total */}
+              {!showStripe && (
+                <button
+                  onClick={() => setShowStripe(true)}
+                  style={{ width: "100%", padding: "16px", background: "var(--rust)", color: "var(--paper)", border: "none", fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", cursor: "pointer", transition: "background 0.3s", marginBottom: "16px" }}
+                >
+                  Continue to Payment →
+                </button>
+              )}
 
-            <div style={{ marginTop: "24px", paddingTop: "20px", borderTop: "1px solid rgba(26,36,34,0.12)", fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: "14px", color: "var(--ink-soft)", lineHeight: 1.6 }}>
-              Every order travels with a hand-written card from the maker.
+              {/* Trust signals */}
+              <div style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--ink-mute)", lineHeight: 2 }}>
+                <div>✓ Secure payment via Stripe</div>
+                <div>✓ Maker notified immediately</div>
+                <div>✓ Hand-checked before delivery</div>
+              </div>
             </div>
           </div>
 

@@ -1,5 +1,6 @@
 import MetaBar from "@/components/layout/MetaBar";
 import Header from "@/components/layout/Header";
+import SlimFooter from "@/components/layout/SlimFooter";
 import Link from "next/link";
 
 export const metadata = {
@@ -169,6 +170,7 @@ export default function StoryPage() {
         </div>
 
       </article>
+      <SlimFooter />
     </>
   );
 }

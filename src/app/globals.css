@@ -90,10 +90,17 @@ body::before {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.8s ease, transform 0.8s ease;
+  will-change: opacity, transform;
 }
 .fade-in.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Prevent flash on sections with dark backgrounds */
+section .fade-in,
+div .fade-in {
+  background: inherit;
 }
 
 /* ── Marquee ── */
@@ -104,6 +111,12 @@ body::before {
 
 /* ── Footer links ── */
 .footer-link:hover { color: var(--paper) !important; }
+
+/* ── How it works steps — always paper bg, never flashes dark ── */
+.how-step { background: var(--paper) !important; }
+
+/* ── Maker cards ── */
+.maker-card:hover { background: var(--paper-deep) !important; }
 
 /* ── Search overlay ── */
 @keyframes fadeInBackdrop {

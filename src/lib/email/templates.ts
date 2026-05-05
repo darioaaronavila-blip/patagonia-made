@@ -57,6 +57,7 @@ export interface OrderEmailData {
     makerName: string;
     quantity: number;
     priceUsd: number;
+    slug: string;
   }>;
   deliveryLabel: string;
   deliveryEta: string;
@@ -68,76 +69,102 @@ export interface OrderEmailData {
 }
 
 export function customerConfirmationHtml(data: OrderEmailData): string {
+  const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://patagoniamade.com";
+
   const itemRows = data.items
-    .map(
-      (item) => `
+    .map((item) => `
       <tr>
-        <td style="padding:14px 0;border-bottom:1px solid rgba(26,36,34,0.08);">
-          <p style="margin:0 0 2px;font-size:16px;color:${PALETTE.ink};font-weight:400;">${item.name}</p>
-          <p style="margin:0;font-size:13px;color:${PALETTE.inkSoft};font-style:italic;">— ${item.makerName}${item.quantity > 1 ? ` · qty ${item.quantity}` : ""}</p>
+        <td style="padding:20px 0;border-bottom:1px solid rgba(26,36,34,0.08);vertical-align:top;">
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+              <td width="64" valign="top" style="padding-right:16px;">
+                <!-- Product colour block — geometric placeholder matching brand aesthetic -->
+                <div style="width:64px;height:64px;background:${PALETTE.inkSoft};display:flex;align-items:center;justify-content:center;font-family:'Courier New',monospace;font-size:8px;color:${PALETTE.paper};letter-spacing:0.15em;text-transform:uppercase;text-align:center;line-height:1.4;">
+                  ${item.name.split(" ").slice(0, 2).join("<br>")}
+                </div>
+              </td>
+              <td valign="top">
+                <p style="margin:0 0 3px;font-size:17px;color:${PALETTE.ink};font-weight:400;line-height:1.3;">${item.name}</p>
+                <p style="margin:0 0 6px;font-size:13px;color:${PALETTE.inkSoft};font-style:italic;">— ${item.makerName}${item.quantity > 1 ? ` · qty ${item.quantity}` : ""}</p>
+                <a href="${SITE}/products/${item.slug}" style="font-family:'Courier New',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:${PALETTE.rust};">View piece →</a>
+              </td>
+              <td valign="top" style="text-align:right;font-size:17px;color:${PALETTE.ink};white-space:nowrap;padding-left:16px;">
+                $${item.priceUsd * item.quantity}
+              </td>
+            </tr>
+          </table>
         </td>
-        <td style="padding:14px 0;border-bottom:1px solid rgba(26,36,34,0.08);text-align:right;font-size:16px;color:${PALETTE.ink};white-space:nowrap;">
-          $${item.priceUsd * item.quantity}
-        </td>
-      </tr>`
-    )
+      </tr>`)
     .join("");
 
-  const deliveryRow =
-    data.deliveryFeeUsd > 0
-      ? `<tr>
-          <td style="padding:10px 0;font-size:14px;color:${PALETTE.inkSoft};">Delivery</td>
-          <td style="padding:10px 0;text-align:right;font-size:14px;color:${PALETTE.inkSoft};">$${data.deliveryFeeUsd}</td>
-        </tr>`
-      : `<tr>
-          <td style="padding:10px 0;font-size:14px;color:${PALETTE.moss};">Delivery</td>
-          <td style="padding:10px 0;text-align:right;font-size:14px;color:${PALETTE.moss};">Free</td>
-        </tr>`;
+  const deliveryRow = data.deliveryFeeUsd > 0
+    ? `<tr>
+        <td style="padding:10px 0;font-size:14px;color:${PALETTE.inkSoft};">Delivery</td>
+        <td style="padding:10px 0;text-align:right;font-size:14px;color:${PALETTE.inkSoft};">$${data.deliveryFeeUsd}</td>
+       </tr>`
+    : `<tr>
+        <td style="padding:10px 0;font-size:14px;color:${PALETTE.moss};">Delivery</td>
+        <td style="padding:10px 0;text-align:right;font-size:14px;color:${PALETTE.moss};">Free</td>
+       </tr>`;
 
-  const accommodationBlock =
-    data.accommodationName
-      ? `<tr><td colspan="2" style="padding:16px;background:rgba(26,36,34,0.04);border:1px solid rgba(26,36,34,0.1);">
-          <p style="margin:0 0 4px;font-family:'Courier New',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:${PALETTE.inkSoft};">Delivering to</p>
-          <p style="margin:0;font-size:15px;color:${PALETTE.ink};">${data.accommodationName}${data.roomNumber ? ` · Room ${data.roomNumber}` : ""}</p>
-         </td></tr>`
-      : "";
+  const accommodationBlock = data.accommodationName
+    ? `<tr><td colspan="2" style="padding:16px;background:rgba(26,36,34,0.04);border:1px solid rgba(26,36,34,0.1);">
+        <p style="margin:0 0 4px;font-family:'Courier New',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:${PALETTE.inkSoft};">Delivering to</p>
+        <p style="margin:0;font-size:15px;color:${PALETTE.ink};font-weight:500;">${data.accommodationName}${data.roomNumber ? ` · Room ${data.roomNumber}` : ""}</p>
+       </td></tr>`
+    : "";
+
+  const itemCount = data.items.reduce((s, i) => s + i.quantity, 0);
 
   const content = `
-    <h2 style="margin:0 0 8px;font-size:32px;font-weight:300;letter-spacing:-0.02em;color:${PALETTE.ink};">Your order is confirmed.</h2>
-    <p style="margin:0 0 32px;font-size:18px;color:${PALETTE.inkSoft};font-style:italic;line-height:1.6;">
-      The maker has been notified. Your piece is being prepared with care at the end of the world.
+    <!-- Thank you headline -->
+    <h2 style="margin:0 0 6px;font-size:36px;font-weight:300;letter-spacing:-0.02em;color:${PALETTE.ink};line-height:1;">
+      Thank you.
+    </h2>
+    <p style="margin:0 0 32px;font-size:19px;color:${PALETTE.inkSoft};font-style:italic;line-height:1.65;">
+      ${itemCount === 1
+        ? "One piece is leaving a workshop at the end of the world and making its way to you."
+        : `${itemCount} pieces are leaving workshops at the end of the world and making their way to you.`}
     </p>
 
-    <!-- Items table -->
+    <!-- Divider -->
+    <div style="height:1px;background:rgba(26,36,34,0.1);margin-bottom:28px;"></div>
+
+    <!-- Items -->
     <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
       ${itemRows}
       <tr><td colspan="2" style="padding:4px 0;"></td></tr>
       ${deliveryRow}
       <tr>
         <td style="padding:16px 0 0;border-top:1px solid ${PALETTE.ink};font-size:18px;font-weight:500;color:${PALETTE.ink};">Total</td>
-        <td style="padding:16px 0 0;border-top:1px solid ${PALETTE.ink};text-align:right;font-size:24px;font-weight:500;color:${PALETTE.ink};">$${data.totalUsd}</td>
+        <td style="padding:16px 0 0;border-top:1px solid ${PALETTE.ink};text-align:right;font-size:26px;font-weight:500;color:${PALETTE.ink};">$${data.totalUsd}</td>
       </tr>
       ${accommodationBlock}
     </table>
 
-    <!-- Delivery info -->
+    <!-- Delivery info box -->
     <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:36px;background:rgba(26,36,34,0.03);border:1px solid rgba(26,36,34,0.12);">
       <tr><td style="padding:20px 24px;">
-        <p style="margin:0 0 4px;font-family:'Courier New',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:${PALETTE.inkSoft};">Delivery</p>
+        <p style="margin:0 0 4px;font-family:'Courier New',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:${PALETTE.inkSoft};">What happens next</p>
         <p style="margin:0 0 4px;font-size:16px;color:${PALETTE.ink};">${data.deliveryLabel}</p>
         <p style="margin:0;font-size:13px;color:${PALETTE.inkSoft};font-style:italic;">${data.deliveryEta}</p>
       </td></tr>
     </table>
 
-    <!-- Sign-off -->
-    <p style="margin:0 0 8px;font-size:16px;color:${PALETTE.inkSoft};line-height:1.7;">
-      Your piece will arrive with a hand-written card from the maker — a small fragment of Patagonia traveling with it.
+    <!-- Poetic sign-off -->
+    <p style="margin:0 0 12px;font-size:17px;color:${PALETTE.inkSoft};line-height:1.75;">
+      Every piece travels with a card hand-written by the maker — a small fragment of Patagonia
+      that will outlast the journey.
     </p>
-    <p style="margin:0;font-size:14px;color:${PALETTE.inkSoft};font-family:'Courier New',monospace;letter-spacing:0.05em;">
-      Questions? Reply to this email or write to hola@patagoniamade.com
+    <p style="margin:0 0 36px;font-size:17px;color:${PALETTE.inkSoft};line-height:1.75;">
+      Questions? Reply to this email and a human will answer.
     </p>
 
-    <p style="margin:40px 0 0;font-size:22px;color:${PALETTE.ink};font-style:italic;">— The team at Patagonia &amp; Made</p>
+    <!-- Closing -->
+    <p style="margin:0;font-size:22px;color:${PALETTE.ink};font-style:italic;font-weight:300;border-top:1px solid rgba(26,36,34,0.1);padding-top:28px;">
+      — Patagonia &amp; Made<br>
+      <span style="font-size:13px;font-family:'Courier New',monospace;letter-spacing:0.15em;font-style:normal;color:${PALETTE.inkSoft};">53°09′S · Punta Arenas, Chile</span>
+    </p>
   `;
 
   return base(content);

@@ -8,10 +8,16 @@ import {
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const FROM = process.env.EMAIL_FROM ?? "orders@patagoniamade.com";
-const OPS = process.env.EMAIL_OPS ?? "hola@patagoniamade.com";
+const FROM = process.env.RESEND_FROM_EMAIL ?? "orders@patagoniamade.com";
+const OPS = process.env.OPS_EMAIL ?? "hola@patagoniamade.com";
 
 export async function sendOrderConfirmation(data: OrderEmailData) {
+  console.log("📧 Sending emails...");
+  console.log("   FROM:", FROM);
+  console.log("   TO customer:", data.customerEmail);
+  console.log("   TO ops:", OPS);
+  console.log("   API key present:", !!process.env.RESEND_API_KEY);
+
   const [customerResult, opsResult] = await Promise.allSettled([
     // Customer confirmation
     resend.emails.send({
@@ -31,10 +37,14 @@ export async function sendOrderConfirmation(data: OrderEmailData) {
   ]);
 
   if (customerResult.status === "rejected") {
-    console.error("Failed to send customer confirmation:", customerResult.reason);
+    console.error("❌ Failed to send customer confirmation:", customerResult.reason);
+  } else {
+    console.log("✅ Customer email sent:", JSON.stringify(customerResult.value));
   }
   if (opsResult.status === "rejected") {
-    console.error("Failed to send ops alert:", opsResult.reason);
+    console.error("❌ Failed to send ops alert:", opsResult.reason);
+  } else {
+    console.log("✅ Ops email sent:", JSON.stringify(opsResult.value));
   }
 
   return {
