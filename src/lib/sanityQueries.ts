@@ -53,7 +53,7 @@ export async function sanityGetAllProducts(): Promise<Product[]> {
   );
 }
 
-export async function sanityGetProductBySlug(slug: string): Promise<Product | null> {
+export async function sanityGetProductBySlug(slug: string): Promise<Product | undefined> {
   return sanityClient.fetch(
     `*[_type == "product" && slug.current == $slug && active == true][0] ${PRODUCT_PROJECTION}`,
     { slug }
@@ -80,14 +80,14 @@ export async function sanityGetAllMakers(): Promise<Maker[]> {
   );
 }
 
-export async function sanityGetMakerBySlug(slug: string): Promise<Maker | null> {
+export async function sanityGetMakerBySlug(slug: string): Promise<Maker | undefined> {
   return sanityClient.fetch(
     `*[_type == "maker" && slug.current == $slug][0] ${MAKER_PROJECTION}`,
     { slug }
   );
 }
 
-export async function sanityGetFeaturedMaker(): Promise<Maker | null> {
+export async function sanityGetFeaturedMaker(): Promise<Maker | undefined> {
   return sanityClient.fetch(
     `*[_type == "maker" && featured == true][0] ${MAKER_PROJECTION}`
   );
