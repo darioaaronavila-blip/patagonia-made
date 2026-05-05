@@ -1,0 +1,52 @@
+[
+  {
+    "id": "rosa-mansilla",
+    "name": "Rosa Mansilla",
+    "location": "Río Verde",
+    "bio": "For three generations her family has raised sheep on the wide grasslands of Río Verde, three hours north of Punta Arenas. Rosa shears, washes, cards and spins the wool herself — dyeing it with calafate berries, lichen, and chañar bark gathered from the steppe.",
+    "quote": "The wool here is different. The wind makes it strong. You can feel where it comes from.",
+    "workingSince": 1998,
+    "discipline": "textiles",
+    "featured": true
+  },
+  {
+    "id": "hector-vargas",
+    "name": "Héctor Vargas",
+    "location": "Punta Arenas",
+    "bio": "Héctor learned woodworking from his father in a workshop that still uses hand planes older than either of them. He works exclusively with native lenga beech — salvaged timber from wind-felled trees on his family's land south of the city.",
+    "quote": "Lenga is not furniture wood. It's the forest distilled. You have to earn the right to cut it.",
+    "workingSince": 1985,
+    "discipline": "wood",
+    "featured": false
+  },
+  {
+    "id": "carmen-diaz",
+    "name": "Carmen Díaz",
+    "location": "Punta Arenas",
+    "bio": "Carmen spent twenty years as a cook in estancia kitchens before founding Conservas Magallanes in her home kitchen. Her small-batch preserves use fruit and spices that grow only in this latitude — calafate, rhubarb, merkén pepper.",
+    "quote": "Everything I make, I make in quantities I can count. That's the only way to keep it honest.",
+    "workingSince": 2008,
+    "discipline": "provisions",
+    "featured": false
+  },
+  {
+    "id": "andres-kusanovic",
+    "name": "Andrés Kusanovic",
+    "location": "Punta Arenas",
+    "bio": "Third-generation saddler. His grandfather made gear for the big sheep estancias; Andrés pivoted toward objects for people who travel — mate holders, belts, card wallets — using the same estancia-tanned leather, the same waxed thread.",
+    "quote": "A saddle and a card wallet are the same problem: the leather has to last longer than the person.",
+    "workingSince": 2001,
+    "discipline": "leather",
+    "featured": false
+  },
+  {
+    "id": "miriam-yanez",
+    "name": "Miriam Yáñez",
+    "location": "Punta Arenas",
+    "bio": "Miriam trained as a ceramicist in Valparaíso and returned south to work with Patagonian mineral glazes — copper, iron oxide, manganese drawn from the steppe and the coast. Her palette is the palette of the landscape.",
+    "quote": "I'm not trying to make pretty things. I'm trying to make things that remember where they came from.",
+    "workingSince": 2014,
+    "discipline": "ceramics",
+    "featured": false
+  }
+]

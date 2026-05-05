@@ -1,0 +1,15 @@
+{
+  "framework": "nextjs",
+  "regions": ["gru1"],
+  "env": {
+    "NEXT_PUBLIC_SITE_URL": "https://patagoniamade.com"
+  },
+  "headers": [
+    {
+      "source": "/api/webhooks/stripe",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "https://api.stripe.com" }
+      ]
+    }
+  ]
+}
