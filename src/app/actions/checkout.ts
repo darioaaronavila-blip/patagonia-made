@@ -60,7 +60,7 @@ export async function createCheckoutSession(input: CreateSessionInput) {
         product_data: {
           name: deliveryLabel,
           description: zone?.etaLabel ?? "",
-          metadata: {},
+          metadata: {} as { productId: string; makerId: string; slug: string },
         },
         unit_amount: fee.feeCents,
       },
