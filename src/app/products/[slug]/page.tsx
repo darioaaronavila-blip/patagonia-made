@@ -50,30 +50,26 @@ export default async function ProductPage({
           >
             {product.unsplashId ? (
               <>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={productDetailUrl(product.unsplashId)}
-                alt={product.name}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  objectPosition: "center",
-                  display: "block",
-                }}
-              />
-              {/* Gradient overlay on mobile — info readable over image */}
-              <div className="product-img-gradient" style={{
-                position: "absolute",
-                inset: 0,
-                background: "linear-gradient(to top, rgba(26,36,34,0.85) 0%, rgba(26,36,34,0.3) 50%, transparent 100%)",
-                pointerEvents: "none",
-              }} />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={productDetailUrl(product.unsplashId)}
+                  alt={product.name}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "center",
+                    display: "block",
+                  }}
+                />
+                <div className="product-img-gradient" style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "linear-gradient(to top, rgba(26,36,34,0.85) 0%, rgba(26,36,34,0.3) 50%, transparent 100%)",
+                  pointerEvents: "none",
+                }} />
               </>
             ) : (
-              </>
-            ) }
-            {!product.unsplashId && (
               <>
                 <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.8">
                   <rect x="3" y="3" width="18" height="18" rx="2"/>
