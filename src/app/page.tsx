@@ -74,7 +74,7 @@ export default async function Home() {
         </div>
 
         {/* Rotating compass — top right */}
-        <div style={{ position: "absolute", top: "48px", right: "48px", zIndex: 3, width: "120px", height: "120px", opacity: 0.5, color: "var(--gold)" }}>
+        <div className="compass-desktop" style={{ position: "absolute", top: "48px", right: "48px", zIndex: 3, width: "120px", height: "120px", opacity: 0.5, color: "var(--gold)" }}>
           <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }}>
             <g stroke="currentColor" fill="none" strokeWidth="0.5" style={{ animation: "slow-rotate 60s linear infinite", transformOrigin: "50px 50px" }}>
               <circle cx="50" cy="50" r="48"/>
@@ -94,7 +94,7 @@ export default async function Home() {
           </svg>
         </div>
 
-        <div style={{ position: "relative", zIndex: 2, color: "var(--paper)", minHeight: "88vh" }}>
+        <div className="grid-hero" style={{ position: "relative", zIndex: 2, padding: "clamp(60px,8vw,100px) var(--gutter) clamp(60px,8vw,120px)", color: "var(--paper)", minHeight: "88vh" }}>
           <div>
             <div style={{ fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.3em", textTransform: "uppercase", marginBottom: "32px", display: "flex", gap: "24px", color: "var(--gold)" }}>
               <span>Vol. I</span><span>Spring 2026</span><span>Punta Arenas</span>
@@ -111,7 +111,7 @@ export default async function Home() {
               Browse the Collection →
             </a>
           </div>
-          <div style={{ borderLeft: "1px solid rgba(237,228,211,0.25)", paddingLeft: "40px" }}>
+          <div className="hero-stats" style={{ borderLeft: "1px solid rgba(237,228,211,0.25)", paddingLeft: "40px" }}>
             {[
               { label: "Local Makers", value: "42", unit: "artisans" },
               { label: "Pieces in Stock", value: "316", unit: "handmade" },
@@ -188,7 +188,7 @@ export default async function Home() {
               — Maker №14 / {featuredMaker.location}
             </div>
           </div>
-          <div style={{ padding: "100px 64px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+          <div className="maker-text-pad" style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
             <div style={{ fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "24px", display: "flex", alignItems: "center", gap: "12px" }}>
               <span style={{ display: "inline-block", width: "32px", height: "1px", background: "var(--gold)" }} />
               Maker of the Month
@@ -202,7 +202,7 @@ export default async function Home() {
             <blockquote style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: "24px", lineHeight: 1.4, borderLeft: "2px solid var(--gold)", paddingLeft: "24px", marginBottom: "40px" }}>
               &ldquo;{featuredMaker.quote}&rdquo;
             </blockquote>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3,auto)", gap: "48px", fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(237,228,211,0.6)", paddingTop: "32px", borderTop: "1px solid rgba(237,228,211,0.2)" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "clamp(16px,3vw,48px)", fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(237,228,211,0.6)", paddingTop: "32px", borderTop: "1px solid rgba(237,228,211,0.2)" }}>
               {[["Based in", featuredMaker.location], ["Working since", String(featuredMaker.workingSince)], ["Pieces listed", "14"]].map(([lbl, val]) => (
                 <div key={lbl}>{lbl} <b style={{ display: "block", color: "var(--paper)", fontFamily: "var(--font-display)", fontSize: "18px", fontWeight: 400, textTransform: "none", letterSpacing: 0, marginTop: "4px" }}>{val}</b></div>
               ))}

@@ -182,3 +182,72 @@ section .fade-in, div .fade-in { background: inherit; }
   .metabar-weather  { display: none; }
   .metabar-delivery { display: none; }
 }
+
+/* ═══════════════════════════════════════
+   ADDITIONAL COMPONENT RULES
+   ═══════════════════════════════════════ */
+
+/* Compass — hide on mobile */
+.compass-desktop { display: block; }
+
+/* Hero stats sidebar */
+.hero-stats { border-left: 1px solid rgba(237,228,211,0.25); padding-left: 40px; }
+
+/* Maker feature text padding */
+.maker-text-pad { padding: 100px 64px; }
+
+/* Product detail */
+.product-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+.product-img-gradient { display: none; } /* hidden on desktop */
+
+/* SlimFooter */
+.slim-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; padding: 24px var(--gutter); }
+.slim-footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+
+/* Makers hero */
+.makers-hero { padding: 80px var(--gutter) 64px; }
+
+/* ── TABLET ≤ 1024px ── */
+@media (max-width: 1024px) {
+  .maker-text-pad { padding: 60px 40px; }
+  .product-detail-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+
+/* ── MOBILE ≤ 640px ── */
+@media (max-width: 640px) {
+  /* Compass hidden */
+  .compass-desktop { display: none; }
+
+  /* Hero stats — no border, padding top instead */
+  .hero-stats {
+    border-left: none !important;
+    border-top: 1px solid rgba(237,228,211,0.2);
+    padding-left: 0 !important;
+    padding-top: 28px;
+  }
+
+  /* Maker feature text */
+  .maker-text-pad { padding: 40px var(--gutter); }
+
+  /* Product detail — image full width, info below */
+  .product-detail-grid { grid-template-columns: 1fr; gap: 0; }
+  .product-detail-image {
+    aspect-ratio: 3/2 !important; /* landscape on mobile saves space */
+    border-left: none;
+    border-right: none;
+  }
+  .product-img-gradient { display: block; } /* show gradient on mobile */
+
+  /* Delivery zone cards */
+  .delivery-zone-inner { grid-template-columns: 1fr !important; }
+
+  /* Slim footer — stack */
+  .slim-footer { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .slim-footer-links { gap: 16px; }
+
+  /* Makers hero */
+  .makers-hero { padding: 48px var(--gutter) 40px; }
+
+  /* Newsletter — full width */
+  .newsletter-form-wrap { max-width: 100% !important; }
+}

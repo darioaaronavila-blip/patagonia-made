@@ -2,36 +2,15 @@ import Link from "next/link";
 
 export default function SlimFooter() {
   return (
-    <footer style={{
+    <footer className="slim-footer" style={{
       background: "var(--ink)",
       color: "var(--paper)",
-      padding: "24px 48px",
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      flexWrap: "wrap",
-      gap: "16px",
       marginTop: "80px",
     }}>
-      <Link href="/" style={{
-        fontFamily: "var(--font-display)",
-        fontWeight: 900,
-        fontSize: "18px",
-        letterSpacing: "-0.02em",
-        color: "var(--paper)",
-        textDecoration: "none",
-      }}>
+      <Link href="/" style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: "18px", letterSpacing: "-0.02em", color: "var(--paper)", flexShrink: 0 }}>
         Patagonia <span style={{ color: "var(--gold)", fontStyle: "italic", fontWeight: 500 }}>&amp;</span> Made
       </Link>
-      <div style={{
-        display: "flex",
-        gap: "24px",
-        fontFamily: "var(--font-mono)",
-        fontSize: "10px",
-        letterSpacing: "0.15em",
-        textTransform: "uppercase",
-        flexWrap: "wrap",
-      }}>
+      <div className="slim-footer-links" style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.15em", textTransform: "uppercase" }}>
         {[
           { label: "All pieces", href: "/products" },
           { label: "Makers", href: "/makers" },
@@ -43,14 +22,7 @@ export default function SlimFooter() {
           </Link>
         ))}
       </div>
-      <div style={{
-        fontFamily: "var(--font-mono)",
-        fontSize: "10px",
-        letterSpacing: "0.12em",
-        textTransform: "uppercase",
-        opacity: 0.35,
-        color: "var(--paper)",
-      }}>
+      <div style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase", opacity: 0.35, color: "var(--paper)" }}>
         53°09′S 70°55′W
       </div>
     </footer>

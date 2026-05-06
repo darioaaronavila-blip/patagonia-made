@@ -26,11 +26,12 @@ export default async function ProductPage({
     <>
       <MetaBar />
       <Header />
-      <main style={{ padding: "80px 48px", maxWidth: "1200px", margin: "0 auto" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start" }}>
+      <main style={{ padding: "clamp(32px,4vw,80px) var(--gutter)", maxWidth: "1200px", margin: "0 auto" }}>
+        <div className="grid-2 product-detail-grid" style={{ alignItems: "start" }}>
 
           {/* Image */}
           <div
+            className="product-detail-image"
             style={{
               aspectRatio: "4/5",
               overflow: "hidden",
@@ -48,7 +49,8 @@ export default async function ProductPage({
             }}
           >
             {product.unsplashId ? (
-              // eslint-disable-next-line @next/next/no-img-element
+              <>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={productDetailUrl(product.unsplashId)}
                 alt={product.name}
@@ -60,7 +62,18 @@ export default async function ProductPage({
                   display: "block",
                 }}
               />
+              {/* Gradient overlay on mobile — info readable over image */}
+              <div className="product-img-gradient" style={{
+                position: "absolute",
+                inset: 0,
+                background: "linear-gradient(to top, rgba(26,36,34,0.85) 0%, rgba(26,36,34,0.3) 50%, transparent 100%)",
+                pointerEvents: "none",
+              }} />
+              </>
             ) : (
+              </>
+            ) }
+            {!product.unsplashId && (
               <>
                 <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.8">
                   <rect x="3" y="3" width="18" height="18" rx="2"/>
@@ -74,7 +87,7 @@ export default async function ProductPage({
             )}
           </div>
 
-          {/* Product info — unchanged */}
+          {/* Product info */}
           <div style={{ paddingTop: "24px" }}>
             <div style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--ink-soft)", marginBottom: "8px" }}>
               {product.category} · {product.subcategory}
