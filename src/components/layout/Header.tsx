@@ -13,19 +13,9 @@ export default function Header() {
     <>
       <SearchOverlay isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
 
-      <header style={{
-        padding: "28px 48px 24px",
-        borderBottom: "1px solid var(--ink)",
-        display: "grid",
-        gridTemplateColumns: "1fr auto 1fr",
-        alignItems: "center",
-        gap: "32px",
-        position: "relative",
-        zIndex: 10,
-        background: "var(--paper)",
-      }}>
-        {/* Left nav */}
-        <nav style={{ display: "flex", gap: "32px", fontFamily: "var(--font-mono)", fontSize: "12px", letterSpacing: "0.12em" }}>
+      <header className="header-root">
+        {/* Left nav — hidden on tablet/mobile via CSS */}
+        <nav className="header-nav-left" style={{ fontFamily: "var(--font-mono)", fontSize: "12px", letterSpacing: "0.12em" }}>
           {[
             { label: "Shop", href: "/products" },
             { label: "Makers", href: "/makers" },
@@ -61,7 +51,7 @@ export default function Header() {
         </Link>
 
         {/* Right nav */}
-        <nav style={{ display: "flex", gap: "28px", fontFamily: "var(--font-mono)", fontSize: "12px", letterSpacing: "0.12em", justifyContent: "flex-end", alignItems: "center" }}>
+        <nav className="header-nav-right" style={{ fontFamily: "var(--font-mono)", fontSize: "12px", letterSpacing: "0.12em" }}>
           {/* Search */}
           <button
             onClick={() => setSearchOpen(true)}
@@ -71,7 +61,7 @@ export default function Header() {
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
             </svg>
-            Search
+            <span style={{ display: "var(--search-label-display, inline)" }}>Search</span>
           </button>
 
           {/* Cart */}
@@ -80,16 +70,20 @@ export default function Header() {
             aria-label={`Cart — ${totalItems} items`}
             style={{ background: "none", border: "none", color: "var(--ink)", textTransform: "uppercase", fontFamily: "var(--font-mono)", fontSize: "12px", letterSpacing: "0.12em", cursor: "pointer", display: "flex", alignItems: "center", gap: "8px" }}
           >
-            Cart
-            <span style={{
-              background: totalItems > 0 ? "var(--rust)" : "var(--ink-mute)",
-              color: "var(--paper)",
-              borderRadius: "50%",
-              width: "20px", height: "20px",
-              fontSize: "10px",
-              display: "inline-flex", alignItems: "center", justifyContent: "center",
-              transition: "background 0.3s",
-            }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+            </svg>
+            <span
+              style={{
+                background: totalItems > 0 ? "var(--rust)" : "var(--ink-mute)",
+                color: "var(--paper)",
+                borderRadius: "50%",
+                width: "20px", height: "20px",
+                fontSize: "10px",
+                display: "inline-flex", alignItems: "center", justifyContent: "center",
+                transition: "background 0.3s",
+              }}
+            >
               {totalItems}
             </span>
           </button>

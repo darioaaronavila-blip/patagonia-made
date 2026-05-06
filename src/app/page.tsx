@@ -36,12 +36,12 @@ export default async function Home() {
       <section
         style={{
           position: "relative",
-          minHeight: "88vh",
           overflow: "hidden",
           borderBottom: "1px solid var(--ink)",
           background: "var(--ink)",
         }}
       >
+        {/* SVG background */}
         <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
           <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }}>
             <defs>
@@ -73,8 +73,8 @@ export default async function Home() {
           </svg>
         </div>
 
-        {/* Rotating compass — top right */}
-        <div style={{ position: "absolute", top: "48px", right: "48px", zIndex: 3, width: "120px", height: "120px", opacity: 0.5, color: "var(--gold)" }}>
+        {/* Compass — hidden on mobile via inline media (handled by CSS class below) */}
+        <div className="hero-compass" style={{ position: "absolute", top: "48px", right: "48px", zIndex: 3, width: "120px", height: "120px", opacity: 0.5, color: "var(--gold)" }}>
           <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }}>
             <g stroke="currentColor" fill="none" strokeWidth="0.5" style={{ animation: "slow-rotate 60s linear infinite", transformOrigin: "50px 50px" }}>
               <circle cx="50" cy="50" r="48"/>
@@ -94,24 +94,27 @@ export default async function Home() {
           </svg>
         </div>
 
-        <div style={{ position: "relative", zIndex: 2, padding: "100px 48px 120px", color: "var(--paper)", display: "grid", gridTemplateColumns: "1.3fr 1fr", gap: "80px", alignItems: "end", minHeight: "88vh" }}>
+        {/* Hero content — responsive via CSS class */}
+        <div className="hero-content">
           <div>
-            <div style={{ fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.3em", textTransform: "uppercase", marginBottom: "32px", display: "flex", gap: "24px", color: "var(--gold)" }}>
+            <div style={{ fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.3em", textTransform: "uppercase", marginBottom: "32px", display: "flex", gap: "24px", color: "var(--gold)", flexWrap: "wrap" }}>
               <span>Vol. I</span><span>Spring 2026</span><span>Punta Arenas</span>
             </div>
-            <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(56px, 8.5vw, 132px)", lineHeight: 0.88, letterSpacing: "-0.04em", fontWeight: 300, marginBottom: "32px", color: "var(--paper-light)" }}>
+            <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(48px, 8.5vw, 132px)", lineHeight: 0.88, letterSpacing: "-0.04em", fontWeight: 300, marginBottom: "32px", color: "var(--paper-light)" }}>
               Made at the<br />
               <em style={{ fontStyle: "italic", fontWeight: 400, color: "var(--gold)" }}>edge</em> of the<br />
               <strong style={{ fontWeight: 900 }}>known world.</strong>
             </h1>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "22px", fontStyle: "italic", color: "rgba(237,228,211,0.85)", maxWidth: "540px", marginBottom: "40px", lineHeight: 1.45 }}>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(17px, 2vw, 22px)", fontStyle: "italic", color: "rgba(237,228,211,0.85)", maxWidth: "540px", marginBottom: "40px", lineHeight: 1.45 }}>
               A curated marketplace of textiles, leather, ceramics and provisions — handcrafted across the windswept south of Chile by the people who still remember how.
             </p>
             <a href="#shop" style={{ display: "inline-flex", alignItems: "center", gap: "12px", padding: "16px 28px", background: "var(--rust)", color: "var(--paper)", fontFamily: "var(--font-mono)", fontSize: "12px", letterSpacing: "0.2em", textTransform: "uppercase", border: "1px solid var(--rust)" }}>
               Browse the Collection →
             </a>
           </div>
-          <div style={{ borderLeft: "1px solid rgba(237,228,211,0.25)", paddingLeft: "40px" }}>
+
+          {/* Stats sidebar */}
+          <div className="hero-side">
             {[
               { label: "Local Makers", value: "42", unit: "artisans" },
               { label: "Pieces in Stock", value: "316", unit: "handmade" },
@@ -141,13 +144,13 @@ export default async function Home() {
       </div>
 
       {/* CATEGORIES */}
-      <section style={{ padding: "100px 48px", borderBottom: "1px solid var(--ink)", position: "relative", zIndex: 2 }} id="shop">
-        <div style={{ display: "grid", gridTemplateColumns: "auto 1fr auto", alignItems: "end", gap: "32px", marginBottom: "64px", borderBottom: "1px solid var(--ink)", paddingBottom: "24px" }}>
+      <section style={{ padding: "var(--section-pad-v) var(--section-pad-h)", borderBottom: "1px solid var(--ink)", position: "relative", zIndex: 2 }} id="shop">
+        <div className="section-head">
           <div className="section-number">— I.</div>
-          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(40px,5vw,64px)", fontWeight: 400, letterSpacing: "-0.03em", lineHeight: 1 }}>
+          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(36px,5vw,64px)", fontWeight: 400, letterSpacing: "-0.03em", lineHeight: 1 }}>
             By <em style={{ fontStyle: "italic", color: "var(--rust)" }}>Trade</em>
           </h2>
-          <div style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--ink-soft)", textAlign: "right" }}>
+          <div className="section-head-meta" style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--ink-soft)" }}>
             Six disciplines · {products.length * 5} works
           </div>
         </div>
@@ -155,17 +158,17 @@ export default async function Home() {
       </section>
 
       {/* FEATURED PRODUCTS */}
-      <section style={{ padding: "100px 48px", borderBottom: "1px solid var(--ink)", position: "relative", zIndex: 2 }}>
-        <div style={{ display: "grid", gridTemplateColumns: "auto 1fr auto", alignItems: "end", gap: "32px", marginBottom: "64px", borderBottom: "1px solid var(--ink)", paddingBottom: "24px" }}>
+      <section style={{ padding: "var(--section-pad-v) var(--section-pad-h)", borderBottom: "1px solid var(--ink)", position: "relative", zIndex: 2 }}>
+        <div className="section-head">
           <div className="section-number">— II.</div>
-          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(40px,5vw,64px)", fontWeight: 400, letterSpacing: "-0.03em", lineHeight: 1 }}>
+          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(36px,5vw,64px)", fontWeight: 400, letterSpacing: "-0.03em", lineHeight: 1 }}>
             This <em style={{ fontStyle: "italic", color: "var(--rust)" }}>Week&apos;s</em> Catch
           </h2>
-          <div style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--ink-soft)", textAlign: "right" }}>
+          <div className="section-head-meta" style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--ink-soft)" }}>
             Curated · Updated Mondays
           </div>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "56px 32px", alignItems: "start", gridAutoRows: "1fr" }}>
+        <div className="product-grid">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
@@ -174,8 +177,8 @@ export default async function Home() {
 
       {/* MAKER FEATURE */}
       {featuredMaker && (
-        <section id="makers" style={{ background: "var(--teal-deep)", color: "var(--paper)", borderBottom: "1px solid var(--ink)", position: "relative", zIndex: 2, display: "grid", gridTemplateColumns: "1fr 1.2fr", minHeight: "600px" }}>
-          <div style={{ background: "#0d2220", display: "flex", alignItems: "center", justifyContent: "center", minHeight: "600px", position: "relative" }}>
+        <section id="makers" className="maker-feature" style={{ background: "var(--teal-deep)", color: "var(--paper)", borderBottom: "1px solid var(--ink)", position: "relative", zIndex: 2 }}>
+          <div style={{ background: "#0d2220", display: "flex", alignItems: "center", justifyContent: "center", minHeight: "400px", position: "relative" }}>
             <div style={{ textAlign: "center", opacity: 0.3 }}>
               <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="0.5">
                 <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
@@ -188,21 +191,21 @@ export default async function Home() {
               — Maker №14 / {featuredMaker.location}
             </div>
           </div>
-          <div style={{ padding: "100px 64px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+          <div className="maker-feature-text">
             <div style={{ fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "24px", display: "flex", alignItems: "center", gap: "12px" }}>
               <span style={{ display: "inline-block", width: "32px", height: "1px", background: "var(--gold)" }} />
               Maker of the Month
             </div>
-            <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(40px,5vw,72px)", fontWeight: 300, lineHeight: 1, letterSpacing: "-0.02em", marginBottom: "32px" }}>
+            <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(36px,5vw,72px)", fontWeight: 300, lineHeight: 1, letterSpacing: "-0.02em", marginBottom: "32px" }}>
               {featuredMaker.name}<br /><em style={{ fontStyle: "italic", color: "var(--gold)" }}>spins the wind.</em>
             </h2>
             <p style={{ fontFamily: "var(--font-body)", fontSize: "19px", lineHeight: 1.7, marginBottom: "32px", color: "rgba(237,228,211,0.85)", maxWidth: "540px" }}>
               {featuredMaker.bio}
             </p>
-            <blockquote style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: "24px", lineHeight: 1.4, borderLeft: "2px solid var(--gold)", paddingLeft: "24px", marginBottom: "40px" }}>
+            <blockquote style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: "clamp(18px,2vw,24px)", lineHeight: 1.4, borderLeft: "2px solid var(--gold)", paddingLeft: "24px", marginBottom: "40px" }}>
               &ldquo;{featuredMaker.quote}&rdquo;
             </blockquote>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3,auto)", gap: "48px", fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(237,228,211,0.6)", paddingTop: "32px", borderTop: "1px solid rgba(237,228,211,0.2)" }}>
+            <div className="maker-feature-meta" style={{ fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(237,228,211,0.6)", paddingTop: "32px", borderTop: "1px solid rgba(237,228,211,0.2)" }}>
               {[["Based in", featuredMaker.location], ["Working since", String(featuredMaker.workingSince)], ["Pieces listed", "14"]].map(([lbl, val]) => (
                 <div key={lbl}>{lbl} <b style={{ display: "block", color: "var(--paper)", fontFamily: "var(--font-display)", fontSize: "18px", fontWeight: 400, textTransform: "none", letterSpacing: 0, marginTop: "4px" }}>{val}</b></div>
               ))}
@@ -212,23 +215,23 @@ export default async function Home() {
       )}
 
       {/* HOW IT WORKS */}
-      <section style={{ padding: "100px 48px", borderBottom: "1px solid var(--ink)", position: "relative", zIndex: 2 }} id="story">
-        <div style={{ display: "grid", gridTemplateColumns: "auto 1fr auto", alignItems: "end", gap: "32px", marginBottom: "64px", borderBottom: "1px solid var(--ink)", paddingBottom: "24px" }}>
+      <section style={{ padding: "var(--section-pad-v) var(--section-pad-h)", borderBottom: "1px solid var(--ink)", position: "relative", zIndex: 2 }} id="story">
+        <div className="section-head">
           <div className="section-number">— IV.</div>
-          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(40px,5vw,64px)", fontWeight: 400, letterSpacing: "-0.03em", lineHeight: 1 }}>
+          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(36px,5vw,64px)", fontWeight: 400, letterSpacing: "-0.03em", lineHeight: 1 }}>
             How it <em style={{ fontStyle: "italic", color: "var(--rust)" }}>works</em>
           </h2>
-          <div style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--ink-soft)", textAlign: "right" }}>For travelers · simple terms</div>
+          <div className="section-head-meta" style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--ink-soft)" }}>For travelers · simple terms</div>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "32px" }}>
+        <div className="how-grid">
           {[
             { num: "i.", title: "Browse anytime, anywhere", body: "Closed shops, late flights, public holidays — the marketplace doesn't sleep. Discover makers across Magallanes from your hotel, your plane, or your sofa back home." },
             { num: "ii.", title: "Pay in your currency", body: "Checkout in USD, EUR, or your card's native currency. We handle the conversion and pay the maker in Chilean pesos. No friction, no surprise fees." },
             { num: "iii.", title: "Choose how it reaches you", body: "Delivery to your hotel or accommodation in Punta Arenas and surrounding areas, or pickup directly at the maker's workshop. Every piece travels with the maker's story and a card hand-signed at origin." },
           ].map(({ num, title, body }) => (
             <div key={num} className="how-step" style={{ background: "var(--paper)", padding: "40px 36px", border: "1px solid rgba(26,36,34,0.12)", boxShadow: "0 2px 12px -4px rgba(26,36,34,0.08)" }}>
-              <div style={{ fontFamily: "var(--font-display)", fontStyle: "italic", fontSize: "96px", lineHeight: 0.8, color: "var(--rust)", marginBottom: "24px", fontWeight: 300 }}>{num}</div>
-              <h3 style={{ fontFamily: "var(--font-display)", fontSize: "28px", fontWeight: 500, letterSpacing: "-0.01em", lineHeight: 1.15, marginBottom: "16px" }}>{title}</h3>
+              <div style={{ fontFamily: "var(--font-display)", fontStyle: "italic", fontSize: "clamp(64px, 8vw, 96px)", lineHeight: 0.8, color: "var(--rust)", marginBottom: "24px", fontWeight: 300 }}>{num}</div>
+              <h3 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(20px,2vw,28px)", fontWeight: 500, letterSpacing: "-0.01em", lineHeight: 1.15, marginBottom: "16px" }}>{title}</h3>
               <p style={{ fontFamily: "var(--font-body)", fontSize: "17px", lineHeight: 1.6, color: "var(--ink-soft)" }}>{body}</p>
             </div>
           ))}
@@ -239,8 +242,10 @@ export default async function Home() {
           </Link>
         </div>
       </section>
-      <section style={{ background: "var(--ink)", color: "var(--paper)", padding: "100px 48px", textAlign: "center", borderBottom: "1px solid var(--ink)", position: "relative", zIndex: 2 }}>
-        <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(36px,5vw,56px)", fontWeight: 300, lineHeight: 1, letterSpacing: "-0.02em", marginBottom: "20px" }}>
+
+      {/* NEWSLETTER */}
+      <section style={{ background: "var(--ink)", color: "var(--paper)", padding: "var(--section-pad-v) var(--section-pad-h)", textAlign: "center", borderBottom: "1px solid var(--ink)", position: "relative", zIndex: 2 }}>
+        <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px,5vw,56px)", fontWeight: 300, lineHeight: 1, letterSpacing: "-0.02em", marginBottom: "20px" }}>
           Letters from <em style={{ fontStyle: "italic", color: "var(--gold)" }}>the south.</em>
         </h2>
         <p style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: "19px", color: "rgba(237,228,211,0.7)", maxWidth: "540px", margin: "0 auto 40px" }}>
@@ -250,8 +255,8 @@ export default async function Home() {
       </section>
 
       {/* FOOTER */}
-      <footer style={{ background: "var(--ink)", color: "var(--paper)", padding: "80px 48px 32px", position: "relative", zIndex: 2 }}>
-        <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: "48px", marginBottom: "64px", paddingBottom: "48px", borderBottom: "1px solid rgba(237,228,211,0.2)" }}>
+      <footer style={{ background: "var(--ink)", color: "var(--paper)", padding: "80px var(--section-pad-h) 32px", position: "relative", zIndex: 2 }}>
+        <div className="footer-grid">
           <div>
             <div style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: "24px", marginBottom: "24px" }}>
               <span style={{ display: "block", fontStyle: "italic", fontWeight: 400, fontSize: "11px", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "6px" }}>Est. 2026 — Magallanes</span>
@@ -301,7 +306,7 @@ export default async function Home() {
             </div>
           ))}
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between", fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(237,228,211,0.5)" }}>
+        <div className="footer-bottom">
           <span>© 2026 Patagonia &amp; Made · Punta Arenas, Chile</span>
           <span>53°09′S 70°55′W · The Strait of Magellan</span>
         </div>
