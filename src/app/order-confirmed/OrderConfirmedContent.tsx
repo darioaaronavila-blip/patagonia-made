@@ -20,7 +20,7 @@ export default function OrderConfirmedContent() {
 
   if (!sessionId) {
     return (
-      <main style={{ padding: "120px 48px", textAlign: "center" }}>
+      <main style={{ padding: "clamp(60px,8vw,120px) var(--gutter)", textAlign: "center" }}>
         <p style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: "20px", color: "var(--ink-soft)" }}>
           No order found.
         </p>
@@ -32,7 +32,7 @@ export default function OrderConfirmedContent() {
   }
 
   return (
-    <main style={{ padding: "120px 48px", maxWidth: "680px", margin: "0 auto", textAlign: "center" }}>
+    <main style={{ padding: "clamp(60px,8vw,120px) var(--gutter)", maxWidth: "680px", margin: "0 auto", textAlign: "center" }}>
       {/* Compass */}
       <svg width="80" height="80" viewBox="0 0 100 100" style={{ margin: "0 auto 40px", color: "var(--gold)", opacity: 0.8 }}>
         <circle cx="50" cy="50" r="48" fill="none" stroke="currentColor" strokeWidth="1"/>

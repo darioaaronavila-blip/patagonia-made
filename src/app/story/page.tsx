@@ -18,7 +18,7 @@ export default function StoryPage() {
       <section style={{
         background: "var(--ink)",
         color: "var(--paper)",
-        padding: "120px 48px 100px",
+        padding: "clamp(60px,8vw,120px) var(--gutter 100px",
         borderBottom: "1px solid var(--ink)",
         position: "relative",
         overflow: "hidden",
@@ -54,7 +54,7 @@ export default function StoryPage() {
       </section>
 
       {/* BODY */}
-      <article style={{ maxWidth: "720px", margin: "0 auto", padding: "100px 48px" }}>
+      <article style={{ maxWidth: "720px", margin: "0 auto", padding: "clamp(48px,6vw,100px) var(--gutter" }}>
 
         {/* I */}
         <div style={{ marginBottom: "80px" }}>

@@ -20,7 +20,7 @@ const ICONS: Record<Category, React.ReactNode> = {
 
 export default function CategoryGrid({ categories }: { categories: CategoryItem[] }) {
   return (
-    <div className="category-grid">
+    <div className="grid-6" style={{ background: "var(--ink)", border: "1px solid var(--ink)" }}>
       {categories.map(({ key, label, counts }) => (
         <Link
           key={key}

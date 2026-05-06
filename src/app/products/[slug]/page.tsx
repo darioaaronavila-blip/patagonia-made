@@ -3,6 +3,7 @@ import { getProductBySlug, getAllProducts, getMakerById } from "@/lib/data";
 import MetaBar from "@/components/layout/MetaBar";
 import Header from "@/components/layout/Header";
 import AddToCartButton from "@/components/shop/AddToCartButton";
+import { productDetailUrl } from "@/lib/unsplash";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
@@ -27,15 +28,53 @@ export default async function ProductPage({
       <Header />
       <main style={{ padding: "80px 48px", maxWidth: "1200px", margin: "0 auto" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start" }}>
-          {/* Image placeholder */}
-          <div style={{ aspectRatio: "4/5", background: "var(--paper-deep)", border: "1px solid rgba(26,36,34,0.12)", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: "12px", opacity: 0.4 }}>
-            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.8">
-              <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/>
-            </svg>
-            <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase" }}>Photo coming</span>
+
+          {/* Image */}
+          <div
+            style={{
+              aspectRatio: "4/5",
+              overflow: "hidden",
+              background: "var(--paper-deep)",
+              border: "1px solid rgba(26,36,34,0.12)",
+              position: "relative",
+              ...(!product.unsplashId && {
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "column",
+                gap: "12px",
+                opacity: 0.4,
+              }),
+            }}
+          >
+            {product.unsplashId ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={productDetailUrl(product.unsplashId)}
+                alt={product.name}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectPosition: "center",
+                  display: "block",
+                }}
+              />
+            ) : (
+              <>
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.8">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/>
+                  <circle cx="8.5" cy="8.5" r="1.5"/>
+                  <path d="m21 15-5-5L5 21"/>
+                </svg>
+                <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase" }}>
+                  Photo coming
+                </span>
+              </>
+            )}
           </div>
 
-          {/* Product info */}
+          {/* Product info — unchanged */}
           <div style={{ paddingTop: "24px" }}>
             <div style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--ink-soft)", marginBottom: "8px" }}>
               {product.category} · {product.subcategory}
@@ -98,7 +137,6 @@ export default async function ProductPage({
         )}
       </main>
 
-      {/* Slim footer */}
       <footer style={{ background: "var(--ink)", color: "var(--paper)", padding: "24px 48px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "16px", marginTop: "80px" }}>
         <Link href="/" style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: "18px", letterSpacing: "-0.02em", color: "var(--paper)" }}>
           Patagonia <span style={{ color: "var(--gold)", fontStyle: "italic", fontWeight: 500 }}>&amp;</span> Made
@@ -106,9 +144,9 @@ export default async function ProductPage({
         <div style={{ display: "flex", gap: "24px", fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.15em", textTransform: "uppercase", flexWrap: "wrap" }}>
           {[
             { label: "All pieces", href: "/products" },
-            { label: "Makers", href: "/makers" },
-            { label: "Delivery", href: "/delivery" },
-            { label: "Our Story", href: "/story" },
+            { label: "Makers",     href: "/makers"   },
+            { label: "Delivery",   href: "/delivery" },
+            { label: "Our Story",  href: "/story"    },
           ].map(({ label, href }) => (
             <Link key={label} href={href} style={{ color: "rgba(237,228,211,0.6)", transition: "color 0.2s" }} className="footer-link">{label}</Link>
           ))}

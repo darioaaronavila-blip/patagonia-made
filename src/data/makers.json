@@ -7,7 +7,8 @@
     "quote": "The wool here is different. The wind makes it strong. You can feel where it comes from.",
     "workingSince": 1998,
     "discipline": "textiles",
-    "featured": true
+    "featured": true,
+    "unsplashId": "1589156280159-27698a70f29e"
   },
   {
     "id": "hector-vargas",
@@ -17,7 +18,8 @@
     "quote": "Lenga is not furniture wood. It's the forest distilled. You have to earn the right to cut it.",
     "workingSince": 1985,
     "discipline": "wood",
-    "featured": false
+    "featured": false,
+    "unsplashId": "1504148455328-c376907d081c"
   },
   {
     "id": "carmen-diaz",
@@ -27,7 +29,8 @@
     "quote": "Everything I make, I make in quantities I can count. That's the only way to keep it honest.",
     "workingSince": 2008,
     "discipline": "provisions",
-    "featured": false
+    "featured": false,
+    "unsplashId": "1497034825429-c343d8c3f7e0"
   },
   {
     "id": "andres-kusanovic",
@@ -37,7 +40,8 @@
     "quote": "A saddle and a card wallet are the same problem: the leather has to last longer than the person.",
     "workingSince": 2001,
     "discipline": "leather",
-    "featured": false
+    "featured": false,
+    "unsplashId": "1493119508027-2b584f234d6c"
   },
   {
     "id": "miriam-yanez",
@@ -47,6 +51,7 @@
     "quote": "I'm not trying to make pretty things. I'm trying to make things that remember where they came from.",
     "workingSince": 2014,
     "discipline": "ceramics",
-    "featured": false
+    "featured": false,
+    "unsplashId": "1565193566173-7a0ee3dbe261"
   }
 ]

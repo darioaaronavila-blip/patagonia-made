@@ -18,6 +18,8 @@ export interface Maker {
   workingSince: number;
   discipline: Category;
   featured: boolean;
+  /** Unsplash photo ID — used for maker portrait/card image */
+  unsplashId?: string;
 }
 
 export interface Product {
@@ -38,6 +40,8 @@ export interface Product {
   dimensions?: string;
   material?: string;
   slug: string;
+  /** Unsplash photo ID — used for product imagery until real photography is ready */
+  unsplashId?: string;
 }
 
 export interface CartItem {

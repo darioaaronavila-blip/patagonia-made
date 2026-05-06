@@ -12,11 +12,15 @@
     "badge": "limited",
     "badgeLabel": "Limited · 3 left",
     "stock": 3,
-    "delivery": ["delivery", "pickup"],
+    "delivery": [
+      "delivery",
+      "pickup"
+    ],
     "shortDescription": "Hand-spun merino, dyed with calafate berry and lichen. Woven on a floor loom in Río Verde.",
     "description": "Each throw takes Rosa approximately four days from raw fleece to finished cloth. The natural dyes shift slightly between batches depending on the season — calafate berries produce a deeper blue-grey in autumn, a warmer purple in spring. No two throws are identical.",
     "dimensions": "150 × 200 cm",
-    "material": "100% Patagonian merino, natural plant dyes"
+    "material": "100% Patagonian merino, natural plant dyes",
+    "unsplashId": "1518839467891-197c3d0e67f2"
   },
   {
     "id": "wool-runner-stripe",
@@ -31,11 +35,15 @@
     "badge": "new",
     "badgeLabel": "New arrival",
     "stock": 8,
-    "delivery": ["delivery", "pickup"],
+    "delivery": [
+      "delivery",
+      "pickup"
+    ],
     "shortDescription": "Tight herringbone weave with the traditional estancia stripe — dark navy, rust, natural cream.",
     "description": "The estancia stripe is one of the oldest surviving textile patterns in Magallanes, carried over from the Scottish and Croatian settlers who built the sheep stations in the late 1800s. Rosa weaves it in the original three-colour sequence: raw cream, indigo, and the rust of iron-oxide-dyed wool.",
     "dimensions": "40 × 180 cm",
-    "material": "100% Patagonian merino, natural and mineral dyes"
+    "material": "100% Patagonian merino, natural and mineral dyes",
+    "unsplashId": "1544441893-675173785232"
   },
   {
     "id": "leather-mate-stitched",
@@ -50,11 +58,15 @@
     "badge": "featured",
     "badgeLabel": "Featured",
     "stock": 12,
-    "delivery": ["delivery", "pickup"],
+    "delivery": [
+      "delivery",
+      "pickup"
+    ],
     "shortDescription": "Gourd mate cup wrapped in hand-stitched estancia leather. Includes silver-plated bombilla.",
     "description": "The gourd is sourced from northern Chile, then Andrés wraps it in full-grain leather from cattle raised on Patagonian grassland. Saddle-stitched by hand with waxed linen thread. The bombilla (drinking straw) is silver-plated alpaca and can be ordered engraved.",
     "dimensions": "8 cm diameter × 12 cm tall",
-    "material": "Natural gourd, full-grain estancia leather, waxed linen thread, silver-plate bombilla"
+    "material": "Natural gourd, full-grain estancia leather, waxed linen thread, silver-plate bombilla",
+    "unsplashId": "1519389050473-19e9622b9de8"
   },
   {
     "id": "leather-card-wallet",
@@ -67,11 +79,15 @@
     "priceUsd": 58,
     "priceClp": 54200,
     "stock": 20,
-    "delivery": ["delivery", "pickup"],
+    "delivery": [
+      "delivery",
+      "pickup"
+    ],
     "shortDescription": "Four-card slim wallet in tan or dark brown. Vegetable-tanned, will age to a deep patina.",
     "description": "Holds four cards and folds flat to 8mm. Cut from a single piece of vegetable-tanned leather — the same stock Andrés uses for saddle components. Each wallet is numbered and signed on the inside. The leather starts tan and darkens with handling over the first year of use.",
     "dimensions": "9.5 × 7 cm folded",
-    "material": "Vegetable-tanned full-grain bovine leather, waxed thread"
+    "material": "Vegetable-tanned full-grain bovine leather, waxed thread",
+    "unsplashId": "1548036161-eff3a52e63d1"
   },
   {
     "id": "ceramic-mate-glacial",
@@ -86,11 +102,15 @@
     "badge": "new",
     "badgeLabel": "New arrival",
     "stock": 6,
-    "delivery": ["delivery", "pickup"],
+    "delivery": [
+      "delivery",
+      "pickup"
+    ],
     "shortDescription": "Wheel-thrown stoneware in Miriam's signature glacial blue — copper and iron oxide over white slip.",
     "description": "The glacial blue glaze is Miriam's own formula, developed over two years working with copper carbonate and iron oxide sourced locally. Fired to cone 10 reduction, which produces the faint matte texture and depth of colour. Each cup comes with a small card describing the glaze minerals and where they were gathered.",
     "dimensions": "8 cm diameter × 11 cm tall",
-    "material": "Stoneware, copper-iron oxide glaze"
+    "material": "Stoneware, copper-iron oxide glaze",
+    "unsplashId": "1565193566173-7a0ee3dbe261"
   },
   {
     "id": "ceramic-espresso-set",
@@ -103,11 +123,15 @@
     "priceUsd": 124,
     "priceClp": 116000,
     "stock": 4,
-    "delivery": ["delivery", "pickup"],
+    "delivery": [
+      "delivery",
+      "pickup"
+    ],
     "shortDescription": "Set of four espresso cups in earthy manganese-brown. Stacking design, dishwasher safe.",
     "description": "A stacking set of four 80ml espresso cups. The steppe glaze is Miriam's most complex formula — manganese dioxide layered over a tan slip, producing unpredictable warm browns and greys that recall the Patagonian grassland at dusk. Each set is sold with slight glaze variation between cups, intentional.",
     "dimensions": "6 cm diameter × 6 cm tall (each)",
-    "material": "Stoneware, manganese-dioxide glaze"
+    "material": "Stoneware, manganese-dioxide glaze",
+    "unsplashId": "1514228742587-6b1558fcca3d"
   },
   {
     "id": "wood-serving-board",
@@ -122,11 +146,15 @@
     "badge": "heritage",
     "badgeLabel": "Heritage piece",
     "stock": 5,
-    "delivery": ["delivery", "pickup"],
+    "delivery": [
+      "delivery",
+      "pickup"
+    ],
     "shortDescription": "Wind-felled lenga beech, live edge preserved. Oiled with flaxseed. No two are the same.",
     "description": "Cut from wind-felled lenga beech on the Vargas family land. Héctor keeps the live edge — the irregular natural boundary of the tree — on at least one side of each board. Oiled four times with food-grade flaxseed oil and finished with beeswax. Comes with a small bag of additional flaxseed oil for future treatment.",
     "dimensions": "40–55 cm × 20–28 cm × 2.5 cm (varies)",
-    "material": "Native lenga beech (Nothofagus pumilio), flaxseed oil, beeswax"
+    "material": "Native lenga beech (Nothofagus pumilio), flaxseed oil, beeswax",
+    "unsplashId": "1541781774459-bb2af2f05b55"
   },
   {
     "id": "wood-salt-cellar",
@@ -139,11 +167,15 @@
     "priceUsd": 48,
     "priceClp": 44900,
     "stock": 14,
-    "delivery": ["delivery", "pickup"],
+    "delivery": [
+      "delivery",
+      "pickup"
+    ],
     "shortDescription": "Small lathe-turned bowl for salt or spices. Dense lenga heartwood, food-safe oil finish.",
     "description": "Turned on a foot-powered lathe that Héctor's father built in the 1970s. The lenga heartwood develops an orange-red tone in the centre of older trees — Héctor selects pieces specifically for this colour variation. 200ml capacity, suitable for salt, spices, or as a ring dish.",
     "dimensions": "9 cm diameter × 5 cm tall",
-    "material": "Native lenga beech heartwood, food-safe mineral oil"
+    "material": "Native lenga beech heartwood, food-safe mineral oil",
+    "unsplashId": "1610725664285-7c57e6eeac3f"
   },
   {
     "id": "provisions-jam-set",
@@ -158,11 +190,15 @@
     "badge": "bestseller",
     "badgeLabel": "Best seller",
     "stock": 30,
-    "delivery": ["delivery", "pickup"],
+    "delivery": [
+      "delivery",
+      "pickup"
+    ],
     "shortDescription": "Three 220g jars: wild calafate berry jam, garden rhubarb compote, and raw honey with smoked merkén.",
     "description": "Carmen's flagship set. The calafate berry grows wild only in southern Patagonia and Tierra del Fuego — the fruit is harvested by hand in February and March, producing a jam that tastes of dark berries and something harder to name. The rhubarb comes from a garden she's tended for fifteen years. The merkén honey uses raw local blossom honey infused with smoked, dried merkén chilli.",
     "dimensions": "220g per jar",
-    "material": "Wild calafate berry, garden rhubarb, local raw honey, smoked merkén"
+    "material": "Wild calafate berry, garden rhubarb, local raw honey, smoked merkén",
+    "unsplashId": "1534083220759-a5d538e3f5f2"
   },
   {
     "id": "compass-marine-1940",
@@ -177,10 +213,14 @@
     "badge": "heritage",
     "badgeLabel": "Antique · 1 of 1",
     "stock": 1,
-    "delivery": ["delivery", "pickup"],
+    "delivery": [
+      "delivery",
+      "pickup"
+    ],
     "shortDescription": "Sestrel dry-card compass, ca. 1940. Restored to working condition. Provenance from a Chilean Navy vessel.",
     "description": "A Sestrel brand dry-card compass, estimated 1938–1945 based on the card typography and bowl casting style. Sourced from a naval salvage dealer in Punta Arenas. Professionally cleaned and restored — the card pivots freely, the bowl is free of bubbles, and the brass has been polished and lacquered. Comes with a provenance note and storage box lined in Patagonian wool.",
     "dimensions": "14 cm diameter bowl, 6 cm deep",
-    "material": "Brass, glass, aluminium card"
+    "material": "Brass, glass, aluminium card",
+    "unsplashId": "1516738901171-8eb4fc13bd20"
   }
 ]

@@ -46,7 +46,7 @@ export default async function ProductsPage({
       <Header />
 
       {/* Page header */}
-      <section style={{ padding: "64px 48px 0", borderBottom: "1px solid var(--ink)", position: "relative", zIndex: 2 }}>
+      <section style={{ padding: "clamp(40px,5vw,64px) var(--gutter) 0", borderBottom: "1px solid var(--ink)", position: "relative", zIndex: 2 }}>
         <div style={{ display: "grid", gridTemplateColumns: "auto 1fr auto", alignItems: "end", gap: "32px", marginBottom: "40px", paddingBottom: "24px", borderBottom: "1px solid var(--ink)" }}>
           <div className="section-number">— Shop</div>
           <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(36px,4.5vw,60px)", fontWeight: 400, letterSpacing: "-0.03em", lineHeight: 1 }}>
@@ -121,7 +121,7 @@ export default async function ProductsPage({
       </section>
 
       {/* Product grid */}
-      <section style={{ padding: "64px 48px 100px", position: "relative", zIndex: 2 }}>
+      <section style={{ padding: "clamp(40px,5vw,64px) var(--gutter) 100px", position: "relative", zIndex: 2 }}>
         {filtered.length === 0 ? (
           <div style={{ textAlign: "center", padding: "80px 0" }}>
             <p style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: "20px", color: "var(--ink-soft)", marginBottom: "24px" }}>
@@ -132,7 +132,7 @@ export default async function ProductsPage({
             </Link>
           </div>
         ) : (
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "56px 32px", gridAutoRows: "1fr" }}>
+          <div className="grid-3" style={{ gridAutoRows: "1fr" }}>
             {filtered.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}

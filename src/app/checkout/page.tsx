@@ -26,7 +26,7 @@ export default function CheckoutPage() {
       <>
         <MetaBar />
         <Header />
-        <main style={{ padding: "120px var(--section-pad-h)", textAlign: "center" }}>
+        <main style={{ padding: "120px 48px", textAlign: "center" }}>
           <div style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: "24px", color: "var(--ink-soft)", marginBottom: "32px" }}>
             Your cart is empty.
           </div>
@@ -42,16 +42,15 @@ export default function CheckoutPage() {
     <>
       <MetaBar />
       <Header />
-      <main style={{ padding: "56px var(--section-pad-h) 100px", maxWidth: "1060px", margin: "0 auto" }}>
+      <main style={{ padding: "clamp(32px,4vw,56px) var(--gutter) 100px", maxWidth: "1060px", margin: "0 auto" }}>
 
         {/* Title */}
-        <div style={{ marginBottom: "44px", borderBottom: "1px solid var(--ink)", paddingBottom: "20px", display: "flex", alignItems: "baseline", gap: "20px", flexWrap: "wrap" }}>
+        <div style={{ marginBottom: "44px", borderBottom: "1px solid var(--ink)", paddingBottom: "20px", display: "flex", alignItems: "baseline", gap: "20px" }}>
           <div style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--ink-soft)" }}>— Checkout</div>
           <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px,3.5vw,48px)", fontWeight: 300, lineHeight: 1, letterSpacing: "-0.02em" }}>Almost there.</h1>
         </div>
 
-        {/* On mobile: order summary first, then delivery — achieved via column-reverse on mobile in CSS */}
-        <div className="checkout-grid">
+        <div className="checkout-grid" style={{ alignItems: "start" }}>
 
           {/* LEFT — delivery options */}
           <div>
@@ -147,13 +146,14 @@ export default function CheckoutPage() {
             )}
           </div>
 
-          {/* RIGHT — order summary */}
+          {/* RIGHT — order summary + CTA */}
           <div style={{ position: "sticky", top: "24px" }}>
             <div style={{ background: "var(--paper-deep)", padding: "36px", border: "1px solid var(--ink)" }}>
               <div style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--ink-soft)", marginBottom: "16px" }}>
                 Order summary
               </div>
 
+              {/* Items */}
               <ul style={{ listStyle: "none", marginBottom: "16px" }}>
                 {items.map((item) => {
                   const product = getProduct(item.productId);
@@ -170,6 +170,7 @@ export default function CheckoutPage() {
                 })}
               </ul>
 
+              {/* Delivery line */}
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", padding: "10px 0", borderBottom: "1px solid rgba(26,36,34,0.08)" }}>
                 <span style={{ fontFamily: "var(--font-body)", fontSize: "15px", color: "var(--ink-soft)" }}>
                   {isPickup ? "Pickup" : selectedZone?.label ?? "Delivery"}
@@ -179,11 +180,13 @@ export default function CheckoutPage() {
                 </span>
               </div>
 
+              {/* Total */}
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", paddingTop: "16px", marginBottom: "24px" }}>
                 <span style={{ fontFamily: "var(--font-display)", fontSize: "18px", fontWeight: 500 }}>Total</span>
                 <span style={{ fontFamily: "var(--font-display)", fontSize: "28px", fontWeight: 500 }}>${grandTotal}</span>
               </div>
 
+              {/* CTA button — right under the total */}
               {!showStripe && (
                 <button
                   onClick={() => setShowStripe(true)}
@@ -193,6 +196,7 @@ export default function CheckoutPage() {
                 </button>
               )}
 
+              {/* Trust signals */}
               <div style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--ink-mute)", lineHeight: 2 }}>
                 <div>✓ Secure payment via Stripe</div>
                 <div>✓ Maker notified immediately</div>

@@ -17,8 +17,21 @@ export default async function WelcomePage() {
     <>
       <MetaBar />
 
-      {/* ── HERO ── */}
-      <section className="welcome-hero">
+      {/* ── HERO ───────────────────────────────────────────────────── */}
+      <section
+        style={{
+          background: "var(--ink)",
+          color: "var(--paper)",
+          height: "calc(100vh - 37px)",
+          padding: "0 var(--gutter)",
+          borderBottom: "1px solid rgba(237,228,211,0.15)",
+          position: "relative",
+          overflow: "hidden",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+      >
         {/* Background */}
         <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
           <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" style={{ width: "100%", height: "100%" }}>
@@ -42,12 +55,14 @@ export default async function WelcomePage() {
             <path d="M0,480 L140,420 L300,460 L480,390 L660,430 L840,375 L1020,415 L1200,380 L1380,425 L1520,395 L1600,415 L1600,900 L0,900 Z" fill="#1f2d2a" opacity="0.7"/>
             <path d="M0,540 L120,500 L260,525 L420,470 L600,510 L780,460 L960,500 L1140,468 L1320,510 L1480,480 L1600,505 L1600,900 L0,900 Z" fill="#152220"/>
             <rect y="680" width="1600" height="220" fill="url(#wwater)"/>
+            <path d="M0,710 Q400,705 800,715 Q1200,705 1600,710" stroke="#2a3a36" strokeWidth="0.8" fill="none" opacity="0.4"/>
+            <path d="M0,730 Q400,725 800,735 Q1200,725 1600,730" stroke="#2a3a36" strokeWidth="0.6" fill="none" opacity="0.3"/>
             <rect width="1600" height="900" fill="url(#wdarken)"/>
           </svg>
         </div>
 
         {/* Top: coordinates */}
-        <div style={{ position: "relative", zIndex: 1, display: "flex", justifyContent: "center", alignItems: "center", gap: "24px", paddingTop: "28px", flexWrap: "wrap" }}>
+        <div style={{ position: "relative", zIndex: 1, display: "flex", justifyContent: "center", alignItems: "center", gap: "24px", paddingTop: "28px" }}>
           <div style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--gold)", opacity: 0.8 }}>
             53°09′S — 70°55′W
           </div>
@@ -58,10 +73,11 @@ export default async function WelcomePage() {
         </div>
 
         {/* Centre: headline */}
-        <div style={{ position: "relative", zIndex: 1, maxWidth: "820px", margin: "0 auto", textAlign: "center", padding: "40px 0" }}>
+        <div style={{ position: "relative", zIndex: 1, maxWidth: "820px", margin: "0 auto", textAlign: "center" }}>
+
           <h1 style={{
             fontFamily: "var(--font-display)",
-            fontSize: "clamp(40px, 7.5vh, 96px)",
+            fontSize: "clamp(44px, 7.5vh, 96px)",
             fontWeight: 300,
             lineHeight: 1.15,
             letterSpacing: "-0.01em",
@@ -78,7 +94,7 @@ export default async function WelcomePage() {
           <p style={{
             fontFamily: "var(--font-body)",
             fontStyle: "italic",
-            fontSize: "clamp(16px, 2vw, 22px)",
+            fontSize: "clamp(17px, 2vw, 22px)",
             color: "rgba(237,228,211,0.7)",
             marginBottom: "40px",
             lineHeight: 1.6,
@@ -109,8 +125,17 @@ export default async function WelcomePage() {
           </Link>
         </div>
 
-        {/* Bottom: three maker names */}
-        <div className="welcome-makers-row">
+        {/* Bottom: three maker names as atmosphere */}
+        <div style={{
+          position: "relative",
+          zIndex: 1,
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gap: "24px",
+          borderTop: "1px solid rgba(237,228,211,0.08)",
+          padding: "20px 0 28px",
+          textAlign: "center",
+        }}>
           {[
             { name: "Rosa Mansilla", craft: "Wool · Río Verde", since: "Est. 1998" },
             { name: "Héctor Vargas", craft: "Lenga wood · Punta Arenas", since: "Est. 2003" },
@@ -124,15 +149,25 @@ export default async function WelcomePage() {
         </div>
       </section>
 
-      {/* ── DELIVERY BANNER ── */}
-      <div className="delivery-banner">
+      {/* ── DELIVERY BANNER — visible on first scroll ─────────────── */}
+      <div style={{
+        background: "var(--rust)",
+        color: "var(--paper)",
+        padding: "20px 48px",
+        borderBottom: "1px solid var(--ink)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "32px",
+        flexWrap: "wrap",
+      }}>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" style={{ flexShrink: 0, opacity: 0.9 }}>
           <path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z"/>
           <path d="M3 9V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2"/>
           <path d="M9 14h6"/>
         </svg>
         <div style={{ textAlign: "center" }}>
-          <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(15px,2.2vw,22px)", fontWeight: 500, letterSpacing: "-0.01em", marginBottom: "4px" }}>
+          <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(17px,2.2vw,22px)", fontWeight: 500, letterSpacing: "-0.01em", marginBottom: "4px" }}>
             Same-day hotel delivery in Punta Arenas
           </div>
           <div style={{ fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase", opacity: 0.85 }}>
@@ -148,78 +183,239 @@ export default async function WelcomePage() {
         </div>
       </div>
 
-      {/* ── CATALOG ── */}
-      <section id="catalog" className="catalog-section">
+      {/* ── CATALOG ────────────────────────────────────────────────── */}
+      <section
+        id="catalog"
+        style={{
+          padding: "clamp(48px,6vw,80px) var(--gutter) clamp(80px,8vw,120px)",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
         {/* Section header */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr auto", alignItems: "end", gap: "24px", marginBottom: "56px", borderBottom: "1px solid var(--ink)", paddingBottom: "20px" }}>
-          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px, 4vw, 52px)", fontWeight: 400, letterSpacing: "-0.02em", lineHeight: 1 }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr auto",
+            alignItems: "end",
+            gap: "24px",
+            marginBottom: "56px",
+            borderBottom: "1px solid var(--ink)",
+            paddingBottom: "20px",
+          }}
+        >
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(32px, 4vw, 52px)",
+              fontWeight: 400,
+              letterSpacing: "-0.02em",
+              lineHeight: 1,
+            }}
+          >
             {allProducts.length} pieces,{" "}
-            <em style={{ fontStyle: "italic", color: "var(--rust)" }}>ready now</em>
+            <em style={{ fontStyle: "italic", color: "var(--rust)" }}>
+              ready now
+            </em>
           </h2>
-          <Link href="/products" style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--ink-soft)", paddingBottom: "4px", borderBottom: "1px solid var(--ink-soft)" }}>
+          <Link
+            href="/products"
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: "10px",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: "var(--ink-soft)",
+              paddingBottom: "4px",
+              borderBottom: "1px solid var(--ink-soft)",
+            }}
+          >
             Full catalog →
           </Link>
         </div>
 
         {/* Category quick-links */}
-        <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "56px" }}>
-          {(["textiles","leather","ceramics","wood","provisions","curios"] as const).map((cat) => (
-            <Link key={cat} href={`/products?category=${cat}`} style={{ padding: "8px 16px", border: "1px solid rgba(26,36,34,0.25)", fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--ink-soft)", transition: "all 0.2s" }}>
+        <div
+          style={{
+            display: "flex",
+            gap: "8px",
+            flexWrap: "wrap",
+            marginBottom: "56px",
+          }}
+        >
+          {(
+            [
+              "textiles",
+              "leather",
+              "ceramics",
+              "wood",
+              "provisions",
+              "curios",
+            ] as const
+          ).map((cat) => (
+            <Link
+              key={cat}
+              href={`/products?category=${cat}`}
+              style={{
+                padding: "8px 16px",
+                border: "1px solid rgba(26,36,34,0.25)",
+                fontFamily: "var(--font-mono)",
+                fontSize: "10px",
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                color: "var(--ink-soft)",
+                transition: "all 0.2s",
+              }}
+            >
               {cat}
             </Link>
           ))}
         </div>
 
         {/* Product grid */}
-        <div className="product-grid">
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: "56px 32px",
+            gridAutoRows: "1fr",
+          }}
+        >
           {allProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
       </section>
 
-      {/* ── TRUST FOOTER ── */}
-      <section className="trust-footer">
+      {/* ── TRUST FOOTER ───────────────────────────────────────────── */}
+      <section
+        style={{
+          background: "var(--paper-deep)",
+          borderTop: "1px solid var(--ink)",
+          padding: "56px 48px",
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gap: "40px",
+        }}
+      >
         {[
           {
-            icon: <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />,
+            icon: (
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+            ),
             title: "Made here",
             body: "Every piece comes from an artisan in the Magallanes region. We know each maker by name.",
           },
           {
-            icon: (<><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></>),
+            icon: (
+              <>
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </>
+            ),
             title: "Delivered tonight",
             body: "Order before 18:00 and your piece arrives at your hotel reception the same evening.",
           },
           {
-            icon: (<><rect x="1" y="4" width="22" height="16" rx="2" ry="2" /><line x1="1" y1="10" x2="23" y2="10" /></>),
+            icon: (
+              <>
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                <line x1="1" y1="10" x2="23" y2="10" />
+              </>
+            ),
             title: "Pay in USD",
             body: "Checkout in USD with any card. No conversion fees, no cash, no waiting.",
           },
         ].map(({ icon, title, body }) => (
           <div key={title} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--rust)" strokeWidth="1.4">{icon}</svg>
-            <div style={{ fontFamily: "var(--font-display)", fontSize: "20px", fontWeight: 500, letterSpacing: "-0.01em" }}>{title}</div>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "16px", lineHeight: 1.65, color: "var(--ink-soft)" }}>{body}</p>
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="var(--rust)"
+              strokeWidth="1.4"
+            >
+              {icon}
+            </svg>
+            <div
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "20px",
+                fontWeight: 500,
+                letterSpacing: "-0.01em",
+              }}
+            >
+              {title}
+            </div>
+            <p
+              style={{
+                fontFamily: "var(--font-body)",
+                fontSize: "16px",
+                lineHeight: 1.65,
+                color: "var(--ink-soft)",
+              }}
+            >
+              {body}
+            </p>
           </div>
         ))}
       </section>
 
-      {/* ── SLIM FOOTER ── */}
-      <footer style={{ background: "var(--ink)", color: "var(--paper)", padding: "24px var(--section-pad-h)" }}>
-        <div className="slim-footer-root">
-          <div style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: "18px", letterSpacing: "-0.02em" }}>
-            Patagonia{" "}<span style={{ color: "var(--gold)", fontStyle: "italic", fontWeight: 500 }}>&amp;</span>{" "}Made
-          </div>
-          <div style={{ display: "flex", gap: "24px", fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.15em", textTransform: "uppercase", opacity: 0.6, flexWrap: "wrap" }}>
-            <Link href="/story" style={{ color: "inherit" }}>Our Story</Link>
-            <Link href="/makers" style={{ color: "inherit" }}>Makers</Link>
-            <Link href="/delivery" style={{ color: "inherit" }}>Delivery</Link>
-            <Link href="/products" style={{ color: "inherit" }}>Full Catalog</Link>
-          </div>
-          <div style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase", opacity: 0.4 }}>
-            53°09′S 70°55′W
-          </div>
+      {/* ── SLIM FOOTER ────────────────────────────────────────────── */}
+      <footer
+        style={{
+          background: "var(--ink)",
+          color: "var(--paper)",
+          padding: "24px 48px",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexWrap: "wrap",
+          gap: "16px",
+        }}
+      >
+        <div
+          style={{
+            fontFamily: "var(--font-display)",
+            fontWeight: 900,
+            fontSize: "18px",
+            letterSpacing: "-0.02em",
+          }}
+        >
+          Patagonia{" "}
+          <span style={{ color: "var(--gold)", fontStyle: "italic", fontWeight: 500 }}>
+            &amp;
+          </span>{" "}
+          Made
+        </div>
+        <div
+          style={{
+            display: "flex",
+            gap: "24px",
+            fontFamily: "var(--font-mono)",
+            fontSize: "10px",
+            letterSpacing: "0.15em",
+            textTransform: "uppercase",
+            opacity: 0.6,
+            flexWrap: "wrap",
+          }}
+        >
+          <Link href="/story" style={{ color: "inherit" }}>Our Story</Link>
+          <Link href="/makers" style={{ color: "inherit" }}>Makers</Link>
+          <Link href="/delivery" style={{ color: "inherit" }}>Delivery</Link>
+          <Link href="/products" style={{ color: "inherit" }}>Full Catalog</Link>
+        </div>
+        <div
+          style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: "10px",
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+            opacity: 0.4,
+          }}
+        >
+          53°09′S 70°55′W
         </div>
       </footer>
     </>

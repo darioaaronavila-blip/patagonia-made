@@ -2,6 +2,7 @@ import { getAllMakers, getProductsByMaker } from "@/lib/data";
 import MetaBar from "@/components/layout/MetaBar";
 import Header from "@/components/layout/Header";
 import SlimFooter from "@/components/layout/SlimFooter";
+import { makerCardUrl } from "@/lib/unsplash";
 import Link from "next/link";
 
 export default async function MakersPage() {
@@ -14,7 +15,7 @@ export default async function MakersPage() {
       <MetaBar />
       <Header />
 
-      {/* Hero */}
+      {/* Hero — unchanged */}
       <section className="makers-hero" style={{
         background: "var(--teal-deep)",
         color: "var(--paper)",
@@ -61,7 +62,7 @@ export default async function MakersPage() {
       </section>
 
       {/* Grid */}
-      <section style={{ padding: "80px var(--section-pad-h) 0", position: "relative", zIndex: 2 }}>
+      <section className="section-pad" style={{ paddingBottom: 0, position: "relative", zIndex: 2 }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div className="makers-grid">
             {makersWithCounts.map(({ maker, productCount }) => (
@@ -71,51 +72,72 @@ export default async function MakersPage() {
                 className="maker-card"
                 style={{ background: "var(--paper)", display: "flex", flexDirection: "column", textDecoration: "none", color: "inherit", border: "1px solid rgba(26,36,34,0.12)", transition: "box-shadow 0.3s", overflow: "hidden" }}
               >
-                {/* Photo placeholder */}
+                {/* Photo */}
                 <div style={{
                   aspectRatio: "3/2",
                   background: "var(--teal-deep)",
                   position: "relative",
                   overflow: "hidden",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
                 }}>
-                  <svg viewBox="0 0 300 200" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0.25 }}>
-                    <defs>
-                      <linearGradient id={`mg-${maker.id}`} x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#3d4d46"/>
-                        <stop offset="100%" stopColor="#0d2220"/>
-                      </linearGradient>
-                    </defs>
-                    <rect width="300" height="200" fill={`url(#mg-${maker.id})`}/>
-                    <path d="M0,100 L40,70 L80,85 L120,55 L160,75 L200,50 L240,70 L280,55 L300,65 L300,200 L0,200 Z" fill="#1f3530" opacity="0.8"/>
-                    <path d="M0,130 L50,105 L100,120 L150,95 L200,115 L250,100 L300,115 L300,200 L0,200 Z" fill="#132825"/>
-                  </svg>
-                  <div style={{ position: "relative", zIndex: 1, textAlign: "center", opacity: 0.45 }}>
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="0.8">
-                      <circle cx="12" cy="8" r="4"/>
-                      <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
-                    </svg>
-                  </div>
+                  {maker.unsplashId ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={makerCardUrl(maker.unsplashId)}
+                      alt={maker.name}
+                      loading="lazy"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        objectPosition: "center top",
+                        display: "block",
+                        transition: "transform 0.7s cubic-bezier(0.4,0,0.2,1)",
+                      }}
+                      className="maker-card-img"
+                    />
+                  ) : (
+                    /* Fallback SVG placeholder */
+                    <>
+                      <svg viewBox="0 0 300 200" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0.25 }}>
+                        <defs>
+                          <linearGradient id={`mg-${maker.id}`} x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#3d4d46"/>
+                            <stop offset="100%" stopColor="#0d2220"/>
+                          </linearGradient>
+                        </defs>
+                        <rect width="300" height="200" fill={`url(#mg-${maker.id})`}/>
+                        <path d="M0,100 L40,70 L80,85 L120,55 L160,75 L200,50 L240,70 L280,55 L300,65 L300,200 L0,200 Z" fill="#1f3530" opacity="0.8"/>
+                        <path d="M0,130 L50,105 L100,120 L150,95 L200,115 L250,100 L300,115 L300,200 L0,200 Z" fill="#132825"/>
+                      </svg>
+                      <div style={{ position: "relative", zIndex: 1, display: "flex", alignItems: "center", justifyContent: "center", height: "100%", opacity: 0.45 }}>
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="0.8">
+                          <circle cx="12" cy="8" r="4"/>
+                          <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+                        </svg>
+                      </div>
+                    </>
+                  )}
+
+                  {/* Discipline tag — always visible */}
                   <div style={{
                     position: "absolute",
                     bottom: "12px",
                     left: "12px",
                     padding: "4px 10px",
-                    background: "rgba(26,36,34,0.7)",
+                    background: "rgba(26,36,34,0.72)",
                     fontFamily: "var(--font-mono)",
                     fontSize: "9px",
                     letterSpacing: "0.15em",
                     textTransform: "uppercase",
                     color: "var(--gold)",
                     backdropFilter: "blur(4px)",
+                    zIndex: 2,
                   }}>
                     {maker.discipline}
                   </div>
                 </div>
 
-                {/* Text */}
+                {/* Text — unchanged */}
                 <div style={{ padding: "28px 28px 24px", flexGrow: 1, display: "flex", flexDirection: "column" }}>
                   <div style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--ink-soft)", marginBottom: "8px" }}>
                     {maker.location} · Est. {maker.workingSince}
@@ -137,7 +159,7 @@ export default async function MakersPage() {
         </div>
       </section>
 
-      {/* Story pull */}
+      {/* Story pull — unchanged */}
       <section style={{ padding: "80px var(--section-pad-h)", maxWidth: "720px", margin: "0 auto", textAlign: "center" }}>
         <p style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: "clamp(16px,2vw,20px)", lineHeight: 1.7, color: "var(--ink-soft)", marginBottom: "28px" }}>
           Every object in this marketplace was made by someone with a name, a location,
